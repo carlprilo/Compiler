@@ -1,3 +1,5 @@
+import ldylex.TextLex;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
@@ -11,6 +13,8 @@ public class MenuFrame extends JFrame{
     private JPopupMenu popup;//右键弹出菜单
     private JPanel panel_east;//panel
     private BorderLayout layout;
+    private JScrollPane inputPane;//输入框
+    private JTextArea textArea;
     private Toolkit kit=Toolkit.getDefaultToolkit();
     private Dimension screenSize=kit.getScreenSize();
     //设置框架的宽高
@@ -189,12 +193,12 @@ public class MenuFrame extends JFrame{
         popup.add(cutAction);
         popup.add(copyAction);
         popup.add(pasteAction);
-        //编辑框
-        final JTextArea textArea = new JTextArea(15, 40);
-        textArea.setComponentPopupMenu(popup);
-        JScrollPane scrollPane = new JScrollPane(textArea);
 
-        add("Center",scrollPane);
+        //输入框
+        textArea = new JTextArea(15, 40);
+        textArea.setComponentPopupMenu(popup);
+        inputPane = new JScrollPane(textArea);
+        add("Center",inputPane);
 
 
 
@@ -242,6 +246,14 @@ public class MenuFrame extends JFrame{
         {
             Color c = (Color) getValue("Color");
             panel_east.setBackground(c);
+
+            if(c.equals(Color.blue))
+            {
+                TextLex lex = new TextLex(textArea.getText(),null,null);
+                System.out.println("This is blue button"); // add by cp
+                lex.scannerAll();
+
+            }
         }
     }
 }
