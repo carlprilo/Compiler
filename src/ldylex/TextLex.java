@@ -514,13 +514,13 @@ public class TextLex {
 	}
 	
 	public void printResult(String rs_value, String rs_name){
-		//tbmodel_lex_result.addRow(new String[]{rs_value, rs_name});
-		System.out.println(rs_value+" : "+rs_name);
+		tbmodel_lex_result.addRow(new String[]{rs_value, rs_name});
+		//System.out.println(rs_value+" : "+rs_name);
 	}
 	
 	public void printError(int row_num, String rs_value, String rs_name) {
-		//tbmodel_lex_error.addRow(new String[]{row_num+"", rs_value, rs_name});
-		System.out.println(row_num+" -> "+rs_value+" : "+rs_name);
+		tbmodel_lex_error.addRow(new String[]{row_num+"", rs_value, rs_name});
+		//System.out.println(row_num+" -> "+rs_value+" : "+rs_name);
 	}
 	
 }
