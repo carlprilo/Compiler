@@ -2,127 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1105e9-efa8-4ecf-8691-c1b350eaaa4a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$ChangeAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$DeductionTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$LexicalTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$SymbolTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$TestAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$TriplesTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$toolAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/EditArea$TestAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/EditArea.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/UITest$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/UITest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/build.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/build_run.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/cached.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/cut.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/error(1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/folder(1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/folder_open.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/more_vert(1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/next.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/paste.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/run.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Complier/sync.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/build.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/build_run.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/cached.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/cut.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/error(1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/folder(1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/folder_open.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/more_vert(1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/next.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/paste.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/run.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/sync.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ComplierUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/DocAttribute.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/DocTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/DocTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/Icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Complier/Icon2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/Icon1.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Complier/Icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/JFrameTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/JFrameTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/Lay.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/LineNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Complier/LineNumber.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuFrame$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuFrame$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuFrame$ColorAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuFrame$TestAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/MenuTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/TextComponentFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/TextComponentFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/TextComponentTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/TextComponentTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ToolBarFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ToolBarFrame$ColorAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ToolBarFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ToolBarTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ToolBarTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ace.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/blue-ball.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/copy.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/cut.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/exit.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/jack.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/java3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/king.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ldylex/TextLex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Complier/ldylex/TextLex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/nine.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/palette.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/paste.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/queen.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/red-ball.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ten.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/yellow-ball.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/Icon2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Icon1.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/Icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ace.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/blue-ball.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/copy.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/cut.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/exit.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/jack.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/king.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/nine.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/palette.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/paste.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/queen.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/red-ball.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/ten.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/yellow-ball.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DocAttribute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DocTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JFrameTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lay.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UITest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TextComponentFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TextComponentTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ToolBarFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ToolBarTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EditArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ldylex/TextLex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ldylex/TextLex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -155,7 +35,7 @@
       <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8648">
+            <state relative-caret-position="23">
               <caret line="391" column="31" selection-start-line="391" selection-start-column="31" selection-end-line="391" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -167,8 +47,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+            <state relative-caret-position="92">
+              <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -185,8 +65,8 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15134">
-              <caret line="658" column="10" selection-start-line="658" selection-start-column="10" selection-end-line="658" selection-end-column="10" />
+            <state relative-caret-position="14812">
+              <caret line="644" column="10" selection-start-line="644" selection-start-column="10" selection-end-line="644" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -439,10 +319,10 @@
       <window_info anchor="right" id="Maven Projects" order="13" />
       <window_info anchor="bottom" id="Run" order="4" sideWeight="0.66979164" weight="0.25751072" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" id="Terminal" order="14" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="14" visible="true" weight="0.3295129" />
       <window_info id="Capture Tool" order="10" />
       <window_info id="Designer" order="8" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.26066098" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.26066098" />
       <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info id="UI Designer" order="11" />
@@ -495,6 +375,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
@@ -638,8 +522,8 @@
     <entry file="file://$PROJECT_DIR$/src/test.java" />
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15134">
-          <caret line="658" column="10" selection-start-line="658" selection-start-column="10" selection-end-line="658" selection-end-column="10" />
+        <state relative-caret-position="14812">
+          <caret line="644" column="10" selection-start-line="644" selection-start-column="10" selection-end-line="644" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -680,7 +564,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8648">
+        <state relative-caret-position="23">
           <caret line="391" column="31" selection-start-line="391" selection-start-column="31" selection-end-line="391" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -690,8 +574,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+        <state relative-caret-position="92">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
         </state>
       </provider>
     </entry>
