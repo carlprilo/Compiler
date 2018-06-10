@@ -1,8 +1,10 @@
 import ldylex.TextLex;
+import ldylex.TextParse;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -335,9 +337,14 @@ public class ComplierUI extends JFrame{
                 String text = textArea.getText();
                 System.out.println("lex start");
                 System.out.println(text);
-                JTable tableLocal = new JTable();
                 TextLex lex = new TextLex(text,modelResult,null);
                 lex.scannerAll();
+                System.out.println("lex finish");
+                ArrayList<String> lex_result_stack =lex.get_Lex_Result();
+                TextParse textParse = new TextParse(lex_result_stack,modelDeduction);
+                textParse.Parsing();
+                System.out.println("parsing finsished");
+
             }
             //按钮点击事件
             //
@@ -414,7 +421,7 @@ public class ComplierUI extends JFrame{
         private Object[][] cells =
                 {
                         { "我是", "推导过程"},
-                        { "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
+                        //{ "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
                 };
 
         public DeductionTable()
@@ -438,10 +445,10 @@ public class ComplierUI extends JFrame{
         private Object[][] cells =
                 {
                         { "我", "是", "符号", "表"},
-                        { "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
-                        { "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
-                        { "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
-                        { "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
+                        // { "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
+                        //{ "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
+                        //{ "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
+                        //{ "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
 
                 };
 
