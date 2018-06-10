@@ -10,12 +10,12 @@ stmts ->   $
 ifstmt ->  if ( boolexpr ) then stmt else stmt
 whilestmt ->  while ( boolexpr ) stmt
 assgstmt ->  ID = arithexpr ;
-decl -> type list;
+decl -> type list ;
 type -> int
 type -> real
 list -> ID list1
-list1 ->, list
-list1 $
+list1 -> , list
+list1 -> $
 boolexpr -> arithexpr boolop arithexpr
 boolop -> <
 boolop -> >
