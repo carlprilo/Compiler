@@ -1,5 +1,6 @@
 import ldylex.TextLex;
 import parsing.TextParse;
+import semantic.SemanticAnalyse;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -22,13 +23,19 @@ public class ComplierUI extends JFrame{
     //private EditArea editArea;
     private JTextArea textArea; //编辑框
     private JPanel panel_east;
-    private JScrollPane scrollPane2;
+    //private JScrollPane scrollPane2;
     private DefaultTableModel modelResult;
     private DefaultTableModel modelDeduction;
+    private DefaultTableModel modelSymbol;
+    private DefaultTableModel modelTriple;
     private JTable tableResult;
     private JTable tableDeduction;
+    private JTable tableSymbol;
+    private JTable tableTriple;
     private JScrollPane paneResult;
     private JScrollPane paneDeduction;
+    private JScrollPane paneSymbol;
+    private JScrollPane paneTriple;
 
     public ComplierUI()
     {
@@ -244,7 +251,7 @@ public class ComplierUI extends JFrame{
 
         //输出语法树，符号表，三地址指令
         panel_right = new JPanel();
-        panel_right.setBackground(Color.WHITE);
+        panel_right.setBackground(Color.LIGHT_GRAY);
         add("East",panel_right);
         panel_right.setPreferredSize(new Dimension(myWIDTH/3,myHEIGHT));
         panel_right.setBorder(BorderFactory.createEtchedBorder());
@@ -345,6 +352,8 @@ public class ComplierUI extends JFrame{
                 textParse.Parsing();
                 System.out.println("parsing finsished");
 
+                SemanticAnalyse semanticanalyse = new SemanticAnalyse(text, modelSymbol, null);
+                semanticanalyse.Parsing();
             }
             //按钮点击事件
             //
@@ -440,26 +449,22 @@ public class ComplierUI extends JFrame{
     //符号表
     class SymbolTable extends JPanel
     {
-
         private String[] columnNames = { "变量名称", "所属类型", "长度", "内存地址"};
         private Object[][] cells =
                 {
                         { "我", "是", "符号", "表"},
-                        // { "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
-                        //{ "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
-                        //{ "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
-                        //{ "Mercury", 2440.0, 0, false}, { "Venus", 6052.0, 0, false}, { "Earth", 6378.0, 1, false}, { "Mars", 3397.0, 2, false},
-
                 };
 
         public SymbolTable()
         {
-            JTable table = new JTable(cells, columnNames);
-            table.setAutoCreateRowSorter(true);
-            JScrollPane scrollPane2 = new JScrollPane();
-            scrollPane2.setViewportView(table);
-            scrollPane2.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/3));
-            this.add(scrollPane2);
+            modelSymbol= new DefaultTableModel(null, columnNames);
+            //modelSymbol.setAutoCreateRowSorter(true);
+            tableSymbol = new JTable(modelSymbol);
+            tableSymbol.setAutoCreateRowSorter(true);
+            paneSymbol = new JScrollPane(tableSymbol);
+            //scrollPane2.setViewportView(table);
+            paneSymbol.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/3));
+            this.add(paneSymbol);
         }
     }
 
@@ -467,27 +472,23 @@ public class ComplierUI extends JFrame{
     //三地址指令
     class TriplesTable extends JPanel
     {
-
         private String[] columnNames = { "序号", "三地址码"};
         private Object[][] cells =
                 {
                         { "我是", "三地址指令"},
-                        { "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
-                        { "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
-                        { "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
-                        { "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
-                        { "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
-
                 };
 
         public TriplesTable()
         {
-            JTable table = new JTable(cells, columnNames);
-            table.setAutoCreateRowSorter(true);
-            JScrollPane scrollPane2 = new JScrollPane();
-            scrollPane2.setViewportView(table);
-            scrollPane2.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/3));
-            this.add(scrollPane2);
+            //JTable table = new JTable(cells, columnNames);
+            modelTriple = new DefaultTableModel(null,columnNames);
+            tableTriple = new JTable(modelTriple);
+            tableTriple.setAutoCreateRowSorter(true);
+            //JScrollPane scrollPane2 = new JScrollPane();
+            //scrollPane2.setViewportView(table);
+            paneTriple = new JScrollPane(tableTriple);
+            paneTriple.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/3));
+            this.add(paneTriple);
         }
     }
 }
