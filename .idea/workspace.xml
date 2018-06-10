@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1105e9-efa8-4ecf-8691-c1b350eaaa4a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/semantic/ConstantType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/ErrorProduction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/ErrorToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/GrammarComplier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/Id.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/MyScanner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/Production.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/SemanticAnalyse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/Symbol.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/SymbolName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/Token.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ComplierUI$SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/ComplierUI$TriplesTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Complier/ComplierUI$TriplesTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Complier/parsing/AnalyseList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Complier/parsing/AnalyseList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ComplierUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComplierUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/AnalyseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/AnalyseList.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,8 +39,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+            <state relative-caret-position="368">
+              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -624,8 +607,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        <state relative-caret-position="368">
+          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
         </state>
       </provider>
     </entry>
