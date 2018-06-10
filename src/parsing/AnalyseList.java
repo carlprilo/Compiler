@@ -1,4 +1,4 @@
-package ldylex;
+package parsing;
 
 import java.io.File;
 import java.io.RandomAccessFile;

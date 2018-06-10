@@ -1,5 +1,5 @@
 import ldylex.TextLex;
-import ldylex.TextParse;
+import parsing.TextParse;
 
 import java.awt.*;
 import java.awt.event.*;

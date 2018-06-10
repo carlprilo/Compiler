@@ -14,7 +14,7 @@ public class TextLex{
 	private ArrayList<HashMap<String, String>> lex_error_stack;
 	private int text_length;
 	private int row_number=1;
-	String[] Key = {"void", "int", "long", "double", "char", "float", "else", "if", "return", "for", "goto", "short", "static", "while", "do"};
+	String[] Key = {"int","real","if","then","else","while"};
 
 	public TextLex(String text, DefaultTableModel tb_lex_result, DefaultTableModel tb_lex_error){
 		lex_result_stack = new ArrayList<String>();
@@ -531,8 +531,8 @@ public class TextLex{
 	public void printResult(String rs_value, String rs_name){
 //		tbmodel_lex_result.addRow(new String[]{rs_value, rs_name});
 		if(rs_name.equals("标识符")){
-			lex_result_stack.add("IDN");
-			tbmodel_lex_result.addRow(new String[]{"IDN", rs_value});
+			lex_result_stack.add("ID");
+			tbmodel_lex_result.addRow(new String[]{"ID", rs_value});
 		}
 		else if(rs_name.equals("整数")){
 			lex_result_stack.add("INT10");

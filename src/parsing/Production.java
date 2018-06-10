@@ -1,4 +1,4 @@
-package ldylex;
+package parsing;
 
 import java.util.ArrayList;
 
