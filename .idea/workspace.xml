@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b1105e9-efa8-4ecf-8691-c1b350eaaa4a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grammar.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictldy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/predictldy.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ComplierUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComplierUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ldylex/AnalyseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/AnalyseList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ldylex/Production.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/Production.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ldylex/TextLex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ldylex/TextLex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ldylex/TextParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/TextParse.java" afterDir="false" />
-    </list>
+    <list default="true" id="4b1105e9-efa8-4ecf-8691-c1b350eaaa4a" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,16 +16,16 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="207">
-              <caret line="9" column="32" lean-forward="true" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+              <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AnalyseList.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AnalyseList.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/parsing/AnalyseList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="253">
+              <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,31 +45,53 @@
       <file leaf-file-name="TextParse.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/parsing/TextParse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1432">
+            <state relative-caret-position="-1128">
               <caret line="34" column="35" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predictldy.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/predictldy.txt">
+      <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4531">
-              <caret line="197" column="32" lean-forward="true" selection-end-line="435" />
+            <state relative-caret-position="23">
+              <caret line="391" lean-forward="true" selection-start-line="391" selection-end-line="391" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Complier.iml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Complier.iml">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="EditArea.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditArea.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UITest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UITest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predictldy.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/predictldy.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="grammar.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grammar.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+            <state relative-caret-position="515">
+              <caret line="32" column="17" lean-forward="true" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -86,7 +99,7 @@
       <file leaf-file-name="TextLex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
+            <state relative-caret-position="3543">
               <caret line="397" column="8" lean-forward="true" selection-start-line="397" selection-start-column="8" selection-end-line="397" selection-end-column="8" />
               <folding>
                 <element signature="e#899#900#0" expanded="true" />
@@ -200,12 +213,6 @@
               <item name="Compiler" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="parsing" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="EditArea.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
           </expand>
           <select />
@@ -322,7 +329,7 @@
     <option name="totallyTimeSpent" value="54889000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1177" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1186" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" x="1755" y="95" width="136" height="615" id="Palette" order="8" weight="0.19739583" />
@@ -333,12 +340,12 @@
       <window_info anchor="right" id="Capture Analysis" order="9" />
       <window_info anchor="bottom" id="Event Log" order="15" sideWeight="0.5005208" side_tool="true" weight="0.15102041" />
       <window_info anchor="right" id="Maven Projects" order="13" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.66979164" visible="true" weight="0.00867052" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.66979164" weight="0.008595988" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" id="Terminal" order="14" weight="0.28557783" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="14" visible="true" weight="0.22254059" />
       <window_info id="Capture Tool" order="10" />
       <window_info id="Designer" order="8" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.17430703" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32925585" />
       <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -512,36 +519,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EditArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1863">
-          <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="759">
-          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MenuFrame.java" />
     <entry file="jar://C:/Lib/Java/jdk1.8.0_151/src.zip!/javax/swing/Action.java" />
-    <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="391" column="31" selection-start-line="391" selection-start-column="31" selection-end-line="391" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Complier.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/predictldy.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="32" lean-forward="true" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+        <state relative-caret-position="69">
+          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grammar.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="32" column="17" lean-forward="true" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -554,24 +547,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/parsing/TextParse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1432">
+        <state relative-caret-position="-1128">
           <caret line="34" column="35" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/AnalyseList.java">
+    <entry file="file://$PROJECT_DIR$/src/UITest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
+        <state relative-caret-position="414">
+          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="391" lean-forward="true" selection-start-line="391" selection-end-line="391" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
+        <state relative-caret-position="3543">
           <caret line="397" column="8" lean-forward="true" selection-start-line="397" selection-start-column="8" selection-end-line="397" selection-end-column="8" />
           <folding>
             <element signature="e#899#900#0" expanded="true" />
@@ -580,17 +591,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grammar.txt">
+    <entry file="file://$PROJECT_DIR$/src/parsing/AnalyseList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predictldy.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4531">
-          <caret line="197" column="32" lean-forward="true" selection-end-line="435" />
+        <state relative-caret-position="253">
+          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
