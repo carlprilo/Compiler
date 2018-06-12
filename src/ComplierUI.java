@@ -366,10 +366,9 @@ public class ComplierUI extends JFrame{
                     lex = new TextLex(text,modelResult,null);
                     partIndex=0;
                 }
-
-                // 将字符串延长一位，防止溢出
                 lex.text = lex.text+'\0';
-                if(partIndex<lex.text_length){
+                boolean tag  = true;
+                while(partIndex<lex.text_length&&tag){
                     char c = lex.text.charAt(partIndex);
                     if(c==' '||c=='\t')
                         partIndex++;
@@ -377,21 +376,24 @@ public class ComplierUI extends JFrame{
                         lex.row_number++;
                         partIndex++;
                     }
-                    else
+                    else{
                         partIndex=lex.scannerPart(partIndex);
+                        tag = false;
+                    }
                 }
+            }else if(action.equals("Sync")) {
+                System.out.println("Touch sync");
+                while(modelResult.getRowCount()>0)
+                    modelResult.removeRow(modelResult.getRowCount()-1);
+
+                while (modelDeduction.getRowCount()>0)
+                    modelDeduction.removeRow(modelDeduction.getRowCount()-1);
+
             }
             //按钮点击事件
-            //
-            //
-            //
-            //待添加
-            //
-            //
-            //
+
         }
     }
-
 
 
     //切换三个显示
