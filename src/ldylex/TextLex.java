@@ -14,6 +14,7 @@ public class TextLex{
 	private ArrayList<HashMap<String, String>> lex_error_stack;
 	public int text_length;
 	public int row_number=1;
+	public int partIndex;
 	String[] Key = {"int","real","if","then","else","while"};
 
 	public TextLex(String text, DefaultTableModel tb_lex_result, DefaultTableModel tb_lex_error){
@@ -74,6 +75,31 @@ public class TextLex{
 			else
 				i=scannerPart(i);
 		}
+	}
+
+	public void scannerStep(int index){
+		System.out.println("before partIndex "+partIndex);
+		System.out.println("index "+index);
+		if(index==0)
+		{
+			partIndex = index;
+			text = text+'\0';
+		}
+
+		boolean tag  = true;
+		while(partIndex<text_length&&tag){
+			char c = text.charAt(partIndex);
+			if(c==' '||c=='\t')
+				partIndex++;
+			else if (c=='\r'||c=='\n') {
+				row_number++;
+				partIndex++;
+			} else{
+				partIndex=scannerPart(partIndex);
+				tag = false;
+			}
+		}
+		System.out.println("partIndex "+partIndex);
 	}
 
 	public int scannerPart(int arg0){

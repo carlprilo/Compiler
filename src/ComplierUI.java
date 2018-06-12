@@ -1,7 +1,5 @@
 import ldylex.TextLex;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import parsing.TextParse;
-import semantic.SemanticAnalyse;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -355,11 +353,12 @@ public class ComplierUI extends JFrame{
                 System.out.println("lex finish");
                 ArrayList<String> lex_result_stack =lex.get_Lex_Result();
                 textParse = new TextParse(lex_result_stack,modelDeduction);
-                textParse.Parsing();
+                textParse.parsing();
                 System.out.println("parsing finsished");
 
+                //todo
 //                SemanticAnalyse semanticanalyse = new SemanticAnalyse(text, modelSymbol, null);
-//                semanticanalyse.Parsing();
+//                semanticanalyse.parsing();
             }
             else if(action.equals("Next Step")) {
                 System.out.println("This is Next Step");
@@ -368,29 +367,16 @@ public class ComplierUI extends JFrame{
                     lex = new TextLex(text,modelResult,null);
                     partIndex=0;
                 }
-                lex.text = lex.text+'\0';
-                boolean tag  = true;
-                while(partIndex<lex.text_length&&tag){
-                    char c = lex.text.charAt(partIndex);
-                    if(c==' '||c=='\t')
-                        partIndex++;
-                    else if (c=='\r'||c=='\n') {
-                        lex.row_number++;
-                        partIndex++;
-                    }
-                    else{
-                        partIndex=lex.scannerPart(partIndex);
-                        tag = false;
-                    }
-                }
+                else { partIndex=1;}
+
+                lex.scannerStep(partIndex);
 
                 if(textParse==null) {
                     ArrayList<String> lex_result_stack =lex.get_Lex_Result();
                     textParse = new TextParse(lex_result_stack,modelDeduction);
                     textParse.deduce_str.add("program");
                 }
-
-                textParse.ParsingPart();
+                textParse.parsingStep();
 
             }else if(action.equals("Sync")) {
                 System.out.println("Touch sync");
@@ -400,6 +386,8 @@ public class ComplierUI extends JFrame{
                 while (modelDeduction.getRowCount()>0)
                     modelDeduction.removeRow(modelDeduction.getRowCount()-1);
 
+                lex  = null;
+                textParse = null;
             }
             //按钮点击事件
 

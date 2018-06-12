@@ -24,7 +24,7 @@ public class TextParse{
     }
 
     // 句法分析
-    public void Parsing(){
+    public void parsing(){
         // 初始符号压入栈
         deduce_str.add("program");
         String right;
@@ -85,7 +85,7 @@ public class TextParse{
         }
     }
 
-    public void ParsingPart(){
+    public void parsingStep(){
         // 初始符号压入栈
         //deduce_str.add("program");
         String right;
