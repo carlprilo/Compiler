@@ -1,4 +1,5 @@
 import ldylex.TextLex;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import parsing.TextParse;
 import semantic.SemanticAnalyse;
 
@@ -36,6 +37,9 @@ public class ComplierUI extends JFrame{
     private JScrollPane paneDeduction;
     private JScrollPane paneSymbol;
     private JScrollPane paneTriple;
+
+    private TextLex lex;
+    private int partIndex;
 
     public ComplierUI()
     {
@@ -344,7 +348,7 @@ public class ComplierUI extends JFrame{
                 String text = textArea.getText();
                 System.out.println("lex start");
                 System.out.println(text);
-                TextLex lex = new TextLex(text,modelResult,null);
+                lex = new TextLex(text,modelResult,null);
                 lex.scannerAll();
                 System.out.println("lex finish");
                 ArrayList<String> lex_result_stack =lex.get_Lex_Result();
@@ -354,6 +358,28 @@ public class ComplierUI extends JFrame{
 
                 SemanticAnalyse semanticanalyse = new SemanticAnalyse(text, modelSymbol, null);
                 semanticanalyse.Parsing();
+            }
+            else if(action.equals("Next Step")) {
+                System.out.println("This is Next Step");
+                if(lex==null){
+                    String text = textArea.getText();
+                    lex = new TextLex(text,modelResult,null);
+                    partIndex=0;
+                }
+
+                // 将字符串延长一位，防止溢出
+                lex.text = lex.text+'\0';
+                if(partIndex<lex.text_length){
+                    char c = lex.text.charAt(partIndex);
+                    if(c==' '||c=='\t')
+                        partIndex++;
+                    else if (c=='\r'||c=='\n') {
+                        lex.row_number++;
+                        partIndex++;
+                    }
+                    else
+                        partIndex=lex.scannerPart(partIndex);
+                }
             }
             //按钮点击事件
             //

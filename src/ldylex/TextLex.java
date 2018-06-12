@@ -7,13 +7,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class TextLex{
 
-	private String text;
+	public String text;
 	private DefaultTableModel tbmodel_lex_result;
 	//	private DefaultTableModel tbmodel_lex_error;
 	private ArrayList<String> lex_result_stack;
 	private ArrayList<HashMap<String, String>> lex_error_stack;
-	private int text_length;
-	private int row_number=1;
+	public int text_length;
+	public int row_number=1;
 	String[] Key = {"int","real","if","then","else","while"};
 
 	public TextLex(String text, DefaultTableModel tb_lex_result, DefaultTableModel tb_lex_error){
