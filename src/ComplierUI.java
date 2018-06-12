@@ -15,9 +15,12 @@ public class ComplierUI extends JFrame{
     //设置框架的宽高
     private int myWIDTH=screenSize.width;
     private int myHEIGHT=screenSize.height;
+//    private int myWIDTH;
+//    private int myHEIGHT;
 
-    private JPanel panel_south2 = new SymbolTable();//具体放置语法树、符号表、三地址指令的panel
+    public JPanel panel_south2 = new SymbolTable();//具体放置语法树、符号表、三地址指令的panel
     private JPanel panel_right;//放置上面组件的panel
+    JPanel panel_message =new JPanel();
 
     private EditArea textArea;
     //private JTextArea textArea; //编辑框
@@ -40,8 +43,31 @@ public class ComplierUI extends JFrame{
     private int partIndex;
     private TextParse textParse;
 
+    private void updaetUI(){
+        panel_right.remove(panel_south2);//必须要先移除，不然ui不会更新
+        panel_right.remove(panel_message);//不然顺序会出错
+        panel_south2 = new SymbolTable();
+        panel_right.add("Center", panel_south2);//重新添加table
+        panel_right.add("South", panel_message);
+        panel_right.updateUI();//更新UI
+
+    }
+
+
+
     public ComplierUI()
     {
+
+        addComponentListener(new ComponentAdapter(){
+            @Override public void componentResized(ComponentEvent e){
+                myWIDTH = getWidth();//frame的宽
+                myHEIGHT = getHeight();//frame的高
+                System.out.println(myHEIGHT);
+                System.out.println(myWIDTH);
+                updaetUI();
+            }
+        });
+
         BorderLayout layout=new BorderLayout();
         setLayout(layout);//给定布局方式
 
@@ -278,8 +304,13 @@ public class ComplierUI extends JFrame{
         outputbar.add(isaddress);
         panel_right.add("North",outputbar);
 
+        panel_south2.setPreferredSize(new Dimension(myWIDTH/3,myHEIGHT/2));
         panel_right.add("Center", panel_south2);
 
+        panel_message.setBackground(Color.WHITE);//报错栏
+        panel_message.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/5));
+        panel_message.setBorder(BorderFactory.createEtchedBorder());
+        panel_right.add("South", panel_message);
         //
         //
         //
@@ -409,10 +440,12 @@ public class ComplierUI extends JFrame{
             String change = getValue(Action.NAME) +"";
             System.out.println(change+change.length());
             panel_right.remove(panel_south2);//必须要先移除，不然ui不会更新
+            panel_right.remove(panel_message);//不然顺序会出错
             if (change.length() == 4)  panel_south2 = new JPanel();//该情况清空
             else if (change.length() == 5)  panel_south2 = new SymbolTable();
             else if (change.length() == 7) panel_south2 = new TriplesTable();
             panel_right.add("Center", panel_south2);//重新添加table
+            panel_right.add("South", panel_message);
             panel_right.updateUI();//更新UI
             //按钮点击事件
             //

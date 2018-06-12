@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.net.URL;
 
 public class UITest {
@@ -9,7 +11,10 @@ public class UITest {
         {
             public void run()
             {
-                JFrame frame = new ComplierUI();
+                ComplierUI frame = new ComplierUI();
+
+
+
 
                 //当框架被关闭的时候结束程序
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,4 +43,6 @@ public class UITest {
             }
         });
     }
+
+
 }
