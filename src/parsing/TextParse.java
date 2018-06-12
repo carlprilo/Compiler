@@ -10,8 +10,10 @@ import java.util.HashMap;
 public class TextParse{
     HashMap<String, String> predictmap;
     ArrayList<String> input_cache;
-    ArrayList<String> deduce_str;
+    public  ArrayList<String> deduce_str;
     DefaultTableModel tbmodel_lex_result;
+
+
 
     public TextParse(ArrayList<String> input_cache, DefaultTableModel tbmodel_lex_result){
         predictmap = new HashMap<String, String>();
@@ -31,7 +33,6 @@ public class TextParse{
 
         while (deduce_str.size()>0 && input_cache.size()>0 ) {
 
-
             // 输入缓冲区与推导符号串第一个字符相等的话，删掉
             try {
                 if(input_cache.get(0).equals(deduce_str.get(deduce_str.size()-1))){
@@ -43,8 +44,6 @@ public class TextParse{
                 // TODO: handle exception
                 e.printStackTrace();
             }
-
-
             // 匹配字符
             leftandinput = deduce_str.get(deduce_str.size()-1)+"-"+input_cache.get(0);
 //			if(input_cache.get(0)==null)
@@ -53,14 +52,12 @@ public class TextParse{
 //			}
             // 能够找到匹配的
             if((right=predictmap.get(leftandinput))!=null){
-
                 // 输出产生式和推导过程
                 process = "";
                 for (int i=deduce_str.size()-1;i>-1;i--) {
                     process = process+deduce_str.get(i)+" ";
                 }
                 tbmodel_lex_result.addRow(new String[]{process, deduce_str.get(deduce_str.size()-1)+" -> "+right});
-
                 // 删掉产生的字符，压入堆栈
                 deduce_str.remove(deduce_str.size()-1);
                 if(right.equals("$")){
@@ -84,6 +81,69 @@ public class TextParse{
                 }
                 tbmodel_lex_result.addRow(new String[]{process, "ERROR!  无法识别的字符"+input_cache.get(0)+"产生式"+leftandinput});
                 input_cache.remove(0);
+            }
+        }
+    }
+
+    public void ParsingPart(){
+        // 初始符号压入栈
+        //deduce_str.add("program");
+        String right;
+        String leftandinput;
+        String process="";
+        boolean tag = true;
+
+        while(deduce_str.size()>0 && input_cache.size()>0 &&tag) {
+
+            // 输入缓冲区与推导符号串第一个字符相等的话，删掉
+            try {
+                if(input_cache.get(0).equals(deduce_str.get(deduce_str.size()-1))){
+                    input_cache.remove(0);
+                    deduce_str.remove(deduce_str.size()-1);
+                    continue;
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+            // 匹配字符
+            leftandinput = deduce_str.get(deduce_str.size()-1)+"-"+input_cache.get(0);
+//			if(input_cache.get(0)==null)
+//			{
+//				leftandinput = leftandinput+"$";
+//			}
+            // 能够找到匹配的
+            if((right=predictmap.get(leftandinput))!=null){
+                // 输出产生式和推导过程
+                process = "";
+                for (int i=deduce_str.size()-1;i>-1;i--) {
+                    process = process+deduce_str.get(i)+" ";
+                }
+                tbmodel_lex_result.addRow(new String[]{process, deduce_str.get(deduce_str.size()-1)+" -> "+right});
+                // 删掉产生的字符，压入堆栈
+                deduce_str.remove(deduce_str.size()-1);
+                if(right.equals("$")){
+                    // 只弹不压
+                }
+                else {
+                    String[] arg = right.split(" ");
+                    for(int i=arg.length-1;i>-1;i--){
+                        // 反向压入堆栈
+                        deduce_str.add(arg[i]);
+                    }
+                }
+
+            }
+            // 否则的话报错
+            else {
+                // 重新书写process
+                process="";
+                for (int i=deduce_str.size()-1;i>-1;i--) {
+                    process = process+deduce_str.get(i)+" ";
+                }
+                tbmodel_lex_result.addRow(new String[]{process, "ERROR!  无法识别的字符"+input_cache.get(0)+"产生式"+leftandinput});
+                input_cache.remove(0);
+                tag = false;
             }
         }
     }
@@ -114,8 +174,5 @@ public class TextParse{
             // TODO: handle exception
             e.printStackTrace();
         }
-
     }
-
-
 }

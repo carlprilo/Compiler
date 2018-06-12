@@ -21,8 +21,8 @@ public class ComplierUI extends JFrame{
     private JPanel panel_south2 = new SymbolTable();//具体放置语法树、符号表、三地址指令的panel
     private JPanel panel_right;//放置上面组件的panel
 
-    //private EditArea editArea;
-    private JTextArea textArea; //编辑框
+    private EditArea textArea;
+    //private JTextArea textArea; //编辑框
     private JPanel panel_east;
     //private JScrollPane scrollPane2;
     private DefaultTableModel modelResult;
@@ -40,6 +40,7 @@ public class ComplierUI extends JFrame{
 
     private TextLex lex;
     private int partIndex;
+    private TextParse textParse;
 
     public ComplierUI()
     {
@@ -206,8 +207,8 @@ public class ComplierUI extends JFrame{
 //        textArea.setComponentPopupMenu(popup);//添加右键菜单
 //        JScrollPane scrollPane = new JScrollPane(textArea);
 //        scrollPane.setPreferredSize(new Dimension(myWIDTH/3,3*myHEIGHT/5));//设置编辑框的大小
-        //editArea = new EditArea();
-        textArea = new JTextArea();
+
+        textArea = new EditArea();
         //editArea.setComponentPopupMenu(popup);//添加右键菜单
         textArea.setPreferredSize(new Dimension(myWIDTH/3,3*myHEIGHT/5));//设置编辑框的大小
         pack();
@@ -345,24 +346,25 @@ public class ComplierUI extends JFrame{
             String action = getValue(Action.NAME).toString();
             System.out.println(action + " selected.......");
             if(action.equals("Run")){
-                String text = textArea.getText();
+
+                String text = textArea.textPane.getText();
                 System.out.println("lex start");
                 System.out.println(text);
                 lex = new TextLex(text,modelResult,null);
                 lex.scannerAll();
                 System.out.println("lex finish");
                 ArrayList<String> lex_result_stack =lex.get_Lex_Result();
-                TextParse textParse = new TextParse(lex_result_stack,modelDeduction);
+                textParse = new TextParse(lex_result_stack,modelDeduction);
                 textParse.Parsing();
                 System.out.println("parsing finsished");
 
-                SemanticAnalyse semanticanalyse = new SemanticAnalyse(text, modelSymbol, null);
-                semanticanalyse.Parsing();
+//                SemanticAnalyse semanticanalyse = new SemanticAnalyse(text, modelSymbol, null);
+//                semanticanalyse.Parsing();
             }
             else if(action.equals("Next Step")) {
                 System.out.println("This is Next Step");
                 if(lex==null){
-                    String text = textArea.getText();
+                    String text = textArea.textPane.getText();
                     lex = new TextLex(text,modelResult,null);
                     partIndex=0;
                 }
@@ -381,6 +383,15 @@ public class ComplierUI extends JFrame{
                         tag = false;
                     }
                 }
+
+                if(textParse==null) {
+                    ArrayList<String> lex_result_stack =lex.get_Lex_Result();
+                    textParse = new TextParse(lex_result_stack,modelDeduction);
+                    textParse.deduce_str.add("program");
+                }
+
+                textParse.ParsingPart();
+
             }else if(action.equals("Sync")) {
                 System.out.println("Touch sync");
                 while(modelResult.getRowCount()>0)
