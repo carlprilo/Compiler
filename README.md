@@ -1,4 +1,4 @@
-## Final Project of ECNU CSSE 2015
+## Final Project of Compiler Principle 2018 Spring
 
 ### 新增功能
 
