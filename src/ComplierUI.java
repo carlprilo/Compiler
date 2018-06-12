@@ -207,15 +207,15 @@ public class ComplierUI extends JFrame{
 //        scrollPane.setPreferredSize(new Dimension(myWIDTH/3,3*myHEIGHT/5));//设置编辑框的大小
 
         textArea = new EditArea();
-        //editArea.setComponentPopupMenu(popup);//添加右键菜单
-        textArea.setPreferredSize(new Dimension(myWIDTH/3,3*myHEIGHT/5));//设置编辑框的大小
+        textArea.setComponentPopupMenu(popup);//添加右键菜单
+        textArea.setPreferredSize(new Dimension(myWIDTH/3,2*myHEIGHT/5));//设置编辑框的大小
         pack();
 
 
 
         //显示词法分析表的内容
         panel_east = new LexicalTable();
-        panel_east.setPreferredSize(new Dimension(myWIDTH/3-36,3*myHEIGHT/5));//全屏则-20
+        panel_east.setPreferredSize(new Dimension(myWIDTH/3-36,2*myHEIGHT/5));//全屏则-20
         panel_east.setBorder(BorderFactory.createEtchedBorder());
         //
         //
@@ -228,7 +228,7 @@ public class ComplierUI extends JFrame{
 
         //显示推导过程
         JPanel panel_south = new DeductionTable();
-        panel_south.setPreferredSize(new Dimension(2*myWIDTH/3,2*myHEIGHT/5));
+        panel_south.setPreferredSize(new Dimension(2*myWIDTH/3,3*myHEIGHT/5));
         panel_south.setBorder(BorderFactory.createEtchedBorder());
         //
         //
@@ -328,7 +328,6 @@ public class ComplierUI extends JFrame{
     }
 
 
-
     //toolbar按钮作用（工具栏）
     class toolAction extends AbstractAction
     {
@@ -390,10 +389,12 @@ public class ComplierUI extends JFrame{
                 textParse = null;
             }
             //按钮点击事件
-
+            JScrollBar bar=paneResult.getVerticalScrollBar();
+            bar.setValue(bar.getMaximum());
+            bar = paneDeduction.getVerticalScrollBar();
+            bar.setValue(bar.getMaximum());
         }
     }
-
 
     //切换三个显示
     class ChangeAction extends AbstractAction
@@ -419,11 +420,8 @@ public class ComplierUI extends JFrame{
             //
             //待添加
             //
-            //
-            //
         }
     }
-
 
 
     //词法分析
@@ -442,11 +440,10 @@ public class ComplierUI extends JFrame{
             tableResult.setAutoCreateRowSorter(true);
             paneResult = new JScrollPane(tableResult);
             //paneResult.setViewportView(tableResult);
-            paneResult.setPreferredSize(new Dimension(myWIDTH/3-36,3*myHEIGHT/5));
+            paneResult.setPreferredSize(new Dimension(myWIDTH/3-36,2*myHEIGHT/5));
             this.add(paneResult);
         }
     }
-
 
 
     //推导过程
@@ -467,7 +464,7 @@ public class ComplierUI extends JFrame{
             tableDeduction.setAutoCreateRowSorter(true);
             paneDeduction = new JScrollPane(tableDeduction);
             //scrollPane2.setViewportView(table);
-            paneDeduction.setPreferredSize(new Dimension(2*myWIDTH/3-30,27*myHEIGHT/100));
+            paneDeduction.setPreferredSize(new Dimension(2*myWIDTH/3-30,3*myHEIGHT/5));
             this.add(paneDeduction);
         }
     }

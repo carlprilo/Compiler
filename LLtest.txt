@@ -10,4 +10,4 @@
        if (i==j) then sum=sum-j; else mult=mult-j/2;
        if (n>1) then n=n-1; else n=n+1;
        if (n<2) then n=n+2; else n=n-2;
-       }
+}
