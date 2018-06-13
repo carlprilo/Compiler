@@ -77,9 +77,10 @@ public class TextLex{
 		}
 	}
 
-	public void scannerStep(int index){
+	public String scannerStep(int index){
 		System.out.println("before partIndex "+partIndex);
 		System.out.println("index "+index);
+		String res = " ";
 		if(index==0)
 		{
 			partIndex = index;
@@ -95,11 +96,14 @@ public class TextLex{
 				row_number++;
 				partIndex++;
 			} else{
+				res = String.valueOf(partIndex-(row_number-1)/2);
 				partIndex=scannerPart(partIndex);
 				tag = false;
+				res = res+" "+String.valueOf(partIndex-(row_number-1)/2);
 			}
 		}
-		System.out.println("partIndex "+partIndex);
+		System.out.println("partIndex "+partIndex +"    "+res);
+		return  res;
 	}
 
 	public int scannerPart(int arg0){

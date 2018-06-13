@@ -15,17 +15,14 @@ public class ComplierUI extends JFrame{
     //设置框架的宽高
     private int myWIDTH=screenSize.width;
     private int myHEIGHT=screenSize.height;
-//    private int myWIDTH;
-//    private int myHEIGHT;
+
 
     public JPanel panel_south2 = new SymbolTable();//具体放置语法树、符号表、三地址指令的panel
     private JPanel panel_right;//放置上面组件的panel
     JPanel panel_message =new JPanel();
 
     private EditArea textArea;
-    //private JTextArea textArea; //编辑框
     private JPanel panel_east;
-    //private JScrollPane scrollPane2;
     private DefaultTableModel modelResult;
     private DefaultTableModel modelDeduction;
     private DefaultTableModel modelSymbol;
@@ -42,7 +39,10 @@ public class ComplierUI extends JFrame{
     private TextLex lex;
     private int partIndex;
     private TextParse textParse;
-
+    private String select;
+    private String from;
+    private String to;
+    private String rowNumber;
     private void updaetUI(){
         panel_right.remove(panel_south2);//必须要先移除，不然ui不会更新
         panel_right.remove(panel_message);//不然顺序会出错
@@ -52,7 +52,6 @@ public class ComplierUI extends JFrame{
         panel_right.updateUI();//更新UI
 
     }
-
 
 
     public ComplierUI()
@@ -234,7 +233,7 @@ public class ComplierUI extends JFrame{
 
         textArea = new EditArea();
         textArea.setComponentPopupMenu(popup);//添加右键菜单
-        textArea.setPreferredSize(new Dimension(myWIDTH/3,2*myHEIGHT/5));//设置编辑框的大小
+        textArea.setPreferredSize(new Dimension(myWIDTH/3,39*myHEIGHT/100));//设置编辑框的大小
         pack();
 
 
@@ -375,6 +374,10 @@ public class ComplierUI extends JFrame{
             System.out.println(action + " selected.......");
             if(action.equals("Run")){
 
+                //add
+                textArea.textPane.select(10,29);
+                textArea.textPane.requestFocus();
+                //add end
                 String text = textArea.textPane.getText();
                 System.out.println("lex start");
                 System.out.println(text);
@@ -399,8 +402,11 @@ public class ComplierUI extends JFrame{
                 }
                 else { partIndex=1;}
 
-                lex.scannerStep(partIndex);
-
+                select = lex.scannerStep(partIndex);
+                from  =select.split(" ")[0];
+                to = select.split(" ")[1];
+                textArea.textPane.select(Integer.parseInt(from),Integer.parseInt(to));
+                textArea.textPane.requestFocus();
                 if(textParse==null) {
                     ArrayList<String> lex_result_stack =lex.get_Lex_Result();
                     textParse = new TextParse(lex_result_stack,modelDeduction);
@@ -473,11 +479,10 @@ public class ComplierUI extends JFrame{
             tableResult.setAutoCreateRowSorter(true);
             paneResult = new JScrollPane(tableResult);
             //paneResult.setViewportView(tableResult);
-            paneResult.setPreferredSize(new Dimension(myWIDTH/3-36,2*myHEIGHT/5));
+            paneResult.setPreferredSize(new Dimension(myWIDTH/3-36,39*myHEIGHT/100));
             this.add(paneResult);
         }
     }
-
 
     //推导过程
     class DeductionTable extends JPanel

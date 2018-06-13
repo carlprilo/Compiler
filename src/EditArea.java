@@ -22,9 +22,8 @@ public class EditArea extends JPanel
         panel.setLayout(new BorderLayout());
         //panel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         textPane=new JTextPane();
-
-
-
+        textPane.setSelectedTextColor(Color.white);
+        textPane.setSelectionColor(Color.RED);
 
         //添加icon
         URL url = UITest.class.getResource("/cut.png");
