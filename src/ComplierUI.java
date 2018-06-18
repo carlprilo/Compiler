@@ -15,6 +15,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import static java.lang.Thread.sleep;
+
 public class ComplierUI extends JFrame{
 
     private Toolkit kit=Toolkit.getDefaultToolkit();
@@ -52,8 +54,6 @@ public class ComplierUI extends JFrame{
     private StringBuffer output_buffer;
 
     private JFileChooser chooser = new JFileChooser();//选择对话框
-
-
 
     private void updaetUI(){
         panel_right.remove(panel_south2);//必须要先移除，不然ui不会更新
@@ -116,10 +116,7 @@ public class ComplierUI extends JFrame{
             }
             d.setCharacterAttributes(old_token.getBegin(), old_token.getName().length(), attr, false);
 
-            JScrollBar bar = paneResult.getVerticalScrollBar();
-            bar.setValue(bar.getMaximum());
-            bar = paneDeduction.getVerticalScrollBar();
-            bar.setValue(bar.getMaximum());
+
 
         }
         select = lex.scannerStep(partIndex);
@@ -161,7 +158,6 @@ public class ComplierUI extends JFrame{
         setLayout(layout);//给定布局方式
 
 
-
         //第一个菜单栏file
         JMenu fileMenu = new JMenu("File");
 
@@ -190,7 +186,6 @@ public class ComplierUI extends JFrame{
                 System.exit(0);
             }
         });
-
 
 
         //菜单栏edit
@@ -247,7 +242,6 @@ public class ComplierUI extends JFrame{
         editMenu.add(optionMenu);
 
 
-
         //菜单栏help
         //为菜单栏选项设置单字母（下划线）
         JMenu helpMenu = new JMenu("Help");
@@ -281,14 +275,11 @@ public class ComplierUI extends JFrame{
         ImageIcon icon_sync = new ImageIcon(url);
 
 
-
         Action nextAction = new toolAction("Next Step", icon_next);
         Action buildAction = new toolAction("Build", icon_build);
         Action runAction = new toolAction("Run", icon_run);
         Action brAction= new toolAction("Build and Run",icon_b_r);
         Action syncAction= new toolAction("Sync",icon_sync);
-
-
 
 
         //工具栏
@@ -312,44 +303,21 @@ public class ComplierUI extends JFrame{
         popup.add(pasteAction);
 
 
-        //编辑框
-//        final JTextArea textArea = new JTextArea(15, 40);
-//        textArea.setComponentPopupMenu(popup);//添加右键菜单
-//        JScrollPane scrollPane = new JScrollPane(textArea);
-//        scrollPane.setPreferredSize(new Dimension(myWIDTH/3,3*myHEIGHT/5));//设置编辑框的大小
-
         textArea = new EditArea();
         textArea.setComponentPopupMenu(popup);//添加右键菜单
         textArea.setPreferredSize(new Dimension(myWIDTH/3,39*myHEIGHT/100));//设置编辑框的大小
         pack();
 
 
-
         //显示词法分析表的内容
         panel_east = new LexicalTable();
         panel_east.setPreferredSize(new Dimension(myWIDTH/3-36,2*myHEIGHT/5));//全屏则-20
         panel_east.setBorder(BorderFactory.createEtchedBorder());
-        //
-        //
-        //
-        //待添加
-        //
-        //
-        //
-
 
         //显示推导过程
         JPanel panel_south = new DeductionTable();
         panel_south.setPreferredSize(new Dimension(2*myWIDTH/3,myHEIGHT/2));
         panel_south.setBorder(BorderFactory.createEtchedBorder());
-        //
-        //
-        //
-        //待添加
-        //
-        //
-        //
-
 
         //边框布局容器
         JPanel panel_con = new JPanel();
@@ -360,7 +328,6 @@ public class ComplierUI extends JFrame{
         panel_con.add("East",panel_east);
         panel_con.add("South",panel_south);
         pack();
-
 
 
 
@@ -397,13 +364,7 @@ public class ComplierUI extends JFrame{
         panel_message.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/5));
         panel_message.setBorder(BorderFactory.createEtchedBorder());
         panel_right.add("South", panel_message);
-        //
-        //
-        //
-        //待添加
-        //
-        //
-        //
+
 
         // the following line is a workaround for bug 4966109
         panel_right.addMouseListener(new MouseAdapter() {});
@@ -415,7 +376,6 @@ public class ComplierUI extends JFrame{
         add("South",panel_down);
         panel_down.setPreferredSize(new Dimension(0,10));
     }
-
 
 
     //输出验证点击事件（菜单栏）
@@ -459,9 +419,7 @@ public class ComplierUI extends JFrame{
                     line = br.readLine();
                     String text = "";
 
-                    //
-                    //处理内容
-                    //
+
                     while (line != null) {
                         text = text + line + "\n";
                         line = br.readLine(); // 一次读入一行数据
@@ -561,35 +519,36 @@ public class ComplierUI extends JFrame{
                 output_buffer = new StringBuffer();
                 textArea.textPane.setForeground(Color.black);
             }
-            else if(action.equals("Build and Run")){
-                Thread thread = new Thread(){
-                    public void run(){
-                        while(old_token!=select||old_token==null){
+            else if(action.equals("Build and Run")) {
+                Thread thread = new Thread() {
+                    public void run() {
+                        do {
                             next();
                             try {
-                                sleep(30);
+                                sleep(200);
+
+                                JScrollBar bar = paneResult.getVerticalScrollBar();
+                                bar.setValue(bar.getMaximum());
+                                bar = paneDeduction.getVerticalScrollBar();
+                                bar.setValue(bar.getMaximum());
+
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                        }
+                        } while (old_token != select && select != null);
                         try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
-
                             String pathname = ".\\output.txt";
                             chooser.setCurrentDirectory(new File("."));
-                            // show file chooser dialog
                             int result = chooser.showOpenDialog(ComplierUI.this);
-                            // if image file accepted, set it as icon of the label
-                            if (result == JFileChooser.APPROVE_OPTION)
-                            {
+                            if (result == JFileChooser.APPROVE_OPTION) {
                                 pathname = chooser.getSelectedFile().getPath();
                             }
-                            File writename = new File(pathname); // 相对路径，如果没有则要建立一个新的output.txt文件
-                            writename.createNewFile(); // 创建新文件
+                            File writename = new File(pathname);
+                            writename.createNewFile();
                             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-                            out.write(output_buffer.toString()); // \r\n即为换行
-                            out.flush(); // 把缓存区内容压入文件
-                            out.close(); // 最后记得关闭文件
-
+                            out.write(output_buffer.toString());
+                            out.flush();
+                            out.close();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -597,11 +556,8 @@ public class ComplierUI extends JFrame{
                 };
                 thread.start();
             }
-            //按钮点击事件
         }
-
     }
-
 
     //切换三个显示
     class ChangeAction extends AbstractAction
@@ -708,8 +664,6 @@ public class ComplierUI extends JFrame{
             modelTriple = new DefaultTableModel(null,columnNames);
             tableTriple = new JTable(modelTriple);
             tableTriple.setAutoCreateRowSorter(true);
-            //JScrollPane scrollPane2 = new JScrollPane();
-            //scrollPane2.setViewportView(table);
             paneTriple = new JScrollPane(tableTriple);
             paneTriple.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/3));
             this.add(paneTriple);
