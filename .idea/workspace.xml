@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1105e9-efa8-4ecf-8691-c1b350eaaa4a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grammar.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictldy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/predictldy.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ComplierUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComplierUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ldylex/TextLex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ldylex/TextLex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/SymbolName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/SymbolName.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +24,8 @@
       <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="427" column="25" selection-start-line="427" selection-start-column="25" selection-end-line="427" selection-end-column="25" />
+            <state relative-caret-position="456">
+              <caret line="554" column="36" selection-start-line="554" selection-start-column="36" selection-end-line="554" selection-end-column="36" />
               <folding>
                 <element signature="e#2031#2367#0" expanded="true" />
                 <element signature="e#2366#2367#0" expanded="true" />
@@ -38,6 +34,27 @@
                 <element signature="e#10811#10812#0" expanded="true" />
                 <element signature="e#10846#10847#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TextLex.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="591" column="25" lean-forward="true" selection-start-line="591" selection-start-column="25" selection-end-line="591" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UITest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UITest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -111,8 +128,8 @@
         <option value="$PROJECT_DIR$/src/EditArea.java" />
         <option value="$PROJECT_DIR$/src/semantic/SymbolName.java" />
         <option value="$PROJECT_DIR$/grammar.txt" />
-        <option value="$PROJECT_DIR$/src/ldylex/TextLex.java" />
         <option value="$PROJECT_DIR$/predictldy.txt" />
+        <option value="$PROJECT_DIR$/src/ldylex/TextLex.java" />
         <option value="$PROJECT_DIR$/src/ComplierUI.java" />
       </list>
     </option>
@@ -138,6 +155,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -150,7 +168,6 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -162,6 +179,12 @@
               <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="Compiler" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ldylex" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -289,38 +312,38 @@
     <option name="totallyTimeSpent" value="64034000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1186" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" x="1755" y="95" width="136" height="615" id="Palette" order="2" weight="0.19739583" />
       <window_info anchor="bottom" id="TODO" order="4" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49947917" weight="0.32943678" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005208" side_tool="true" weight="0.15102041" />
       <window_info anchor="right" id="Maven Projects" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.66979164" weight="0.07734205" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32923076" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.66979164" visible="true" weight="0.07734205" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.05203938" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.889989" visible="true" weight="0.13006397" />
-      <window_info anchor="right" id="Database" order="5" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.889989" visible="true" weight="0.13113007" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info id="Favorites" order="6" sideWeight="0.110011004" side_tool="true" weight="0.21550672" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info id="Favorites" order="6" sideWeight="0.110011004" side_tool="true" weight="0.21550672" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.2238806" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32858416" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49947917" weight="0.32943678" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,13 +454,6 @@
       </provider>
     </entry>
     <entry file="jar://C:/Lib/Java/jdk1.8.0_151/src.zip!/java/awt/event/ActionListener.java" />
-    <entry file="file://$PROJECT_DIR$/src/UITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/semantic/Token.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -508,13 +524,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="111" column="20" lean-forward="true" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LLtest.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -557,10 +566,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="591" column="25" lean-forward="true" selection-start-line="591" selection-start-column="25" selection-end-line="591" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="427" column="25" selection-start-line="427" selection-start-column="25" selection-end-line="427" selection-end-column="25" />
+        <state relative-caret-position="456">
+          <caret line="554" column="36" selection-start-line="554" selection-start-column="36" selection-end-line="554" selection-end-column="36" />
           <folding>
             <element signature="e#2031#2367#0" expanded="true" />
             <element signature="e#2366#2367#0" expanded="true" />

@@ -551,9 +551,8 @@ public class ComplierUI extends JFrame{
     class LexicalTable extends JPanel
     {
 
-        private String[] columnNames = { "名称", "值"};
+        private String[] columnNames = { "Token","Class", "Line","Position"};
         private Object[][] cells = {
-                { "这是", "词法分析"}
         };
 
         public LexicalTable()
