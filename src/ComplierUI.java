@@ -263,7 +263,7 @@ public class ComplierUI extends JFrame{
 
         //显示推导过程
         JPanel panel_south = new DeductionTable();
-        panel_south.setPreferredSize(new Dimension(2*myWIDTH/3,3*myHEIGHT/5));
+        panel_south.setPreferredSize(new Dimension(2*myWIDTH/3,myHEIGHT/2));
         panel_south.setBorder(BorderFactory.createEtchedBorder());
         //
         //
@@ -338,7 +338,7 @@ public class ComplierUI extends JFrame{
         //底边，无作用
         JPanel panel_down = new JPanel();
         add("South",panel_down);
-        panel_down.setPreferredSize(new Dimension(0,0));
+        panel_down.setPreferredSize(new Dimension(0,10));
     }
 
 
@@ -371,7 +371,6 @@ public class ComplierUI extends JFrame{
                 {
                     pathname = chooser.getSelectedFile().getPath();
                 }
-
 
 
                 try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
@@ -415,7 +414,6 @@ public class ComplierUI extends JFrame{
                         pathname = chooser.getSelectedFile().getPath();
                     }
 
-
                     /* 写入Txt文件 */
 
                     File writename = new File(pathname); // 相对路径，如果没有则要建立一个新的output。txt文件
@@ -440,7 +438,6 @@ public class ComplierUI extends JFrame{
 
         }
     }
-
 
     //toolbar按钮作用（工具栏）
     class toolAction extends AbstractAction
@@ -546,11 +543,9 @@ public class ComplierUI extends JFrame{
         }
     }
 
-
     //词法分析
     class LexicalTable extends JPanel
     {
-
         private String[] columnNames = { "Token","Class", "Line","Position"};
         private Object[][] cells = {
         };
@@ -570,12 +565,10 @@ public class ComplierUI extends JFrame{
     //推导过程
     class DeductionTable extends JPanel
     {
-
         private String[] columnNames = { "推导", "运用的产生式"};
         private Object[][] cells =
                 {
                         { "我是", "推导过程"},
-                        //{ "Venus", 6052.0}, { "Earth", 6378.0},{ "Mars", 3397.0}, { "Jupiter", 71492.0},{ "Saturn", 60268.0},{ "Uranus", 25559.0}, { "Neptune", 24766.0},
                 };
 
         public DeductionTable()
@@ -585,7 +578,7 @@ public class ComplierUI extends JFrame{
             tableDeduction.setAutoCreateRowSorter(true);
             paneDeduction = new JScrollPane(tableDeduction);
             //scrollPane2.setViewportView(table);
-            paneDeduction.setPreferredSize(new Dimension(2*myWIDTH/3-30,3*myHEIGHT/5));
+            paneDeduction.setPreferredSize(new Dimension(2*myWIDTH/3-30,2*myHEIGHT/5));
             this.add(paneDeduction);
         }
     }

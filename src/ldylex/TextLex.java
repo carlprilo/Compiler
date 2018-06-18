@@ -88,8 +88,7 @@ public class TextLex{
         System.out.println("before partIndex "+partIndex);
         System.out.println("index "+index);
         String res = " ";
-        if(index==0)
-        {
+        if(index==0) {
             partIndex = index;
             text = text+'\0';
         }
@@ -102,11 +101,14 @@ public class TextLex{
             else if (c=='\r'||c=='\n') {
                 row_number++;
                 partIndex++;
-            } else{
-                res = String.valueOf(partIndex-(row_number-1)/2);
+                sumpos = partIndex;
+                position=0;
+            } else {
+                position = partIndex-sumpos;
+                res = String.valueOf(partIndex);
                 partIndex=scannerPart(partIndex);
                 tag = false;
-                res = res+" "+String.valueOf(partIndex-(row_number-1)/2);
+                res = res+" "+String.valueOf(partIndex);
             }
         }
         System.out.println("partIndex "+partIndex +"    "+res);
@@ -569,28 +571,28 @@ public class TextLex{
 //		tbmodel_lex_result.addRow(new String[]{rs_value, rs_name});
         if(rs_name.equals("标识符")){
             lex_result_stack.add("ID");
-            tbmodel_lex_result.addRow(new String[]{ rs_value,"ID",String.valueOf((row_number+1)/2),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{ rs_value,"ID",String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("整数")){
             lex_result_stack.add("NUM");
-            tbmodel_lex_result.addRow(new String[]{rs_value,"NUM",String.valueOf((row_number+1)/2),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
         }
         else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
             lex_result_stack.add("NUM");
-            tbmodel_lex_result.addRow(new String[]{ rs_value,"NUM",String.valueOf((row_number+1)/2),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{ rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
 
         }
         else if(rs_name.equals("单字符")){
             lex_result_stack.add("CHAR");
-            tbmodel_lex_result.addRow(new String[]{rs_value,"CHAR",String.valueOf((row_number+1)/2),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,"CHAR",String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("字符串")){
             lex_result_stack.add("STR");
-            tbmodel_lex_result.addRow(new String[]{rs_value,"STR",String.valueOf((row_number+1)/2),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,"STR",String.valueOf(row_number),String.valueOf(position)});
         }
         else {
             lex_result_stack.add(rs_value);
-            tbmodel_lex_result.addRow(new String[]{rs_value,rs_name,String.valueOf((row_number+1)/2),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,rs_name,String.valueOf(row_number),String.valueOf(position)});
         }
 
     }
