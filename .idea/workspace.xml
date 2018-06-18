@@ -25,8 +25,8 @@
       <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="442" column="92" selection-start-line="442" selection-start-column="92" selection-end-line="442" selection-end-column="92" />
+            <state relative-caret-position="258">
+              <caret line="442" column="76" selection-start-line="442" selection-start-column="76" selection-end-line="442" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -285,12 +285,12 @@
       <workItem from="1528782282549" duration="574000" />
       <workItem from="1528783843999" duration="824000" />
       <workItem from="1529313435825" duration="248000" />
-      <workItem from="1529327865675" duration="1103000" />
+      <workItem from="1529327865675" duration="1410000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65137000" />
+    <option name="totallyTimeSpent" value="65444000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -306,8 +306,8 @@
       <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32923076" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.66979164" visible="true" weight="0.07734205" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.05203938" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.66979164" weight="0.61002177" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32135075" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.889989" visible="true" weight="0.13219616" />
@@ -603,8 +603,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="442" column="92" selection-start-line="442" selection-start-column="92" selection-end-line="442" selection-end-column="92" />
+        <state relative-caret-position="258">
+          <caret line="442" column="76" selection-start-line="442" selection-start-column="76" selection-end-line="442" selection-end-column="76" />
         </state>
       </provider>
     </entry>

@@ -440,8 +440,8 @@ public class ComplierUI extends JFrame{
 
             else if (action == "About") {
                 JOptionPane.showMessageDialog(null,
-                        "     陈  攀      10152510149\n    李国辉     101525101\n" +
-                                "    陈思睿     10152510246\n     李  政      10152510250\n    王铁林     101525102",
+                        "     陈  攀      10152510149\n    李国辉     10152510179\n" +
+                                "    陈思睿     10152510246\n     李  政      10152510250\n    王铁林     10152510276",
                         "关于我们",JOptionPane.INFORMATION_MESSAGE);
             }
 
