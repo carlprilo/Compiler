@@ -81,13 +81,15 @@ public class TextParse{
         }
     }
 
-    public void parsingStep(){
+    public String parsingStep(){
         // 初始符号压入栈
         //deduce_str.add("program");
         String right;
         String leftandinput;
         String process="";
         boolean tag = true;
+
+        StringBuffer res = new StringBuffer();
 
         while(deduce_str.size()>0 && input_cache.size()>0 &&tag) {
 
@@ -114,6 +116,7 @@ public class TextParse{
                 }
                 tbmodel_lex_result.addRow(new String[]{input_cache.get(0).getRow()+","+input_cache.get(0).getPostion(),process, deduce_str.get(deduce_str.size()-1)+" -> "+right});
                 // 删掉产生的字符，压入堆栈
+                res.append(input_cache.get(0).getRow()+","+input_cache.get(0).getPostion()+" "+process+" "+deduce_str.get(deduce_str.size()-1)+" -> "+right).append('\n');
                 deduce_str.remove(deduce_str.size()-1);
                 if(right.equals("$")){
                     // 只弹不压
@@ -138,6 +141,8 @@ public class TextParse{
                 tag = false;
             }
         }
+
+        return res.toString();
     }
 
     // 获得预测分析表中的产生式以及对应的select集

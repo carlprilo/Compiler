@@ -49,7 +49,7 @@ public class ComplierUI extends JFrame{
     private Token select;
     private Token old_token;
     private String rowNumber;
-
+    private StringBuffer output_buffer;
 
     private JFileChooser chooser = new JFileChooser();//选择对话框
 
@@ -65,6 +65,81 @@ public class ComplierUI extends JFrame{
 
     }
 
+
+    public void next() {
+        System.out.println("This is Next Step");
+        if (lex == null) {
+            String text = textArea.textPane.getText();
+            lex = new TextLex(text, modelResult, null);
+            partIndex = 0;
+        } else {
+            partIndex = 1;
+        }
+
+        if (select != null) {
+            old_token = select;
+            //getAttrFromToken(old_token);
+            StyledDocument d = textArea.textPane.getStyledDocument();
+            SimpleAttributeSet attr = new SimpleAttributeSet();
+
+            System.out.println(old_token.getType());
+
+            switch (old_token.getType()) {
+                case "NUM":
+                    StyleConstants.setForeground(attr, Color.blue);
+                    break;
+                case "ID":
+                    StyleConstants.setForeground(attr, Color.MAGENTA);
+                    break;
+                case "=":
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    StyleConstants.setForeground(attr, Color.green);
+                    break;
+                case "{":
+                case "}":
+                case "(":
+                case ")":
+                case "[":
+                case "]":
+                    StyleConstants.setForeground(attr, Color.red);
+                    break;
+                case "int":
+                case "real":
+                case "if":
+                case "then":
+                case "else":
+                case "while":
+                    StyleConstants.setForeground(attr, Color.ORANGE);
+            }
+            d.setCharacterAttributes(old_token.getBegin(), old_token.getName().length(), attr, false);
+
+            JScrollBar bar = paneResult.getVerticalScrollBar();
+            bar.setValue(bar.getMaximum());
+            bar = paneDeduction.getVerticalScrollBar();
+            bar.setValue(bar.getMaximum());
+
+        }
+        select = lex.scannerStep(partIndex);
+
+        if (select != null) {
+            textArea.textPane.select(select.getBegin(), select.getEnd());
+            textArea.textPane.requestFocus();
+
+
+            if (textParse == null) {
+                ArrayList<Token> lex_result_stack = lex.get_Lex_Result();
+                textParse = new TextParse(lex_result_stack, modelDeduction);
+                textParse.deduce_str.add("program");
+            }
+            String temp = textParse.parsingStep();
+            if (output_buffer == null)
+                output_buffer = new StringBuffer();
+            output_buffer.append(temp);
+        }
+    }
 
     public ComplierUI()
     {
@@ -177,9 +252,6 @@ public class ComplierUI extends JFrame{
         //为菜单栏选项设置单字母（下划线）
         JMenu helpMenu = new JMenu("Help");
         helpMenu.setMnemonic('H');//设置下划线
-        JMenuItem indexItem = new JMenuItem("Index");
-        indexItem.setMnemonic('I');
-        helpMenu.add(indexItem);
         //为菜单栏选项设置单字母快捷键
         Action aboutAction = new TestAction("About");
         aboutAction.putValue(Action.MNEMONIC_KEY, new Integer('A'));
@@ -418,18 +490,10 @@ public class ComplierUI extends JFrame{
 
                     /* 写入Txt文件 */
 
-                    File writename = new File(pathname); // 相对路径，如果没有则要建立一个新的output。txt文件
+                    File writename = new File(pathname); // 相对路径，如果没有则要建立一个新的output.txt文件
                     writename.createNewFile(); // 创建新文件
                     BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-                    String text = textArea.textPane.getText();
-                    //
-                    //
-                    //
-                    //待添加
-                    //
-                    //
-                    //
-                    out.write(text); // \r\n即为换行
+                    out.write(output_buffer.toString()); // \r\n即为换行
                     out.flush(); // 把缓存区内容压入文件
                     out.close(); // 最后记得关闭文件
 
@@ -442,7 +506,7 @@ public class ComplierUI extends JFrame{
                 JOptionPane.showMessageDialog(null,
                         "     陈  攀      10152510149\n    李国辉     10152510179\n" +
                                 "    陈思睿     10152510246\n     李  政      10152510250\n    王铁林     10152510276",
-                        "关于我们",JOptionPane.INFORMATION_MESSAGE);
+                        "小组成员",JOptionPane.INFORMATION_MESSAGE);
             }
 
         }
@@ -484,70 +548,7 @@ public class ComplierUI extends JFrame{
 //                semanticanalyse.parsing();
             }
             else if(action.equals("Next Step")) {
-                System.out.println("This is Next Step");
-                if(lex==null){
-                    String text = textArea.textPane.getText();
-                    lex = new TextLex(text,modelResult,null);
-                    partIndex=0;
-                }
-                else {
-                    partIndex=1;
-                }
-
-                if(select != null) {
-                    old_token = select;
-                    //getAttrFromToken(old_token);
-                    StyledDocument d = textArea.textPane.getStyledDocument();
-                    SimpleAttributeSet attr = new SimpleAttributeSet();
-
-                    System.out.println(old_token.getType());
-
-                    switch (old_token.getType()){
-                        case "NUM" :
-                            StyleConstants.setForeground(attr,Color.blue);
-                            break;
-                        case "ID" :
-                            StyleConstants.setForeground(attr,Color.MAGENTA);
-                            break;
-                        case "=":
-                        case "+":
-                        case "-":
-                        case "*":
-                        case "/":
-                            StyleConstants.setForeground(attr,Color.green);
-                            break;
-                        case "{":
-                        case "}":
-                        case"(":
-                        case")":
-                        case"[":
-                        case"]":
-                            StyleConstants.setForeground(attr,Color.red);
-                            break;
-                        case "int":
-                        case "real":
-                        case "if":
-                        case "then":
-                        case "else" :
-                        case "while":
-                            StyleConstants.setForeground(attr,Color.ORANGE);
-                    }
-
-
-                    d.setCharacterAttributes(old_token.getBegin(),old_token.getName().length() ,attr,false);
-
-
-                }
-                select = lex.scannerStep(partIndex);
-
-                textArea.textPane.select(select.getBegin(),select.getEnd());
-                textArea.textPane.requestFocus();
-                if(textParse==null) {
-                    ArrayList<Token> lex_result_stack =lex.get_Lex_Result();
-                    textParse = new TextParse(lex_result_stack,modelDeduction);
-                    textParse.deduce_str.add("program");
-                }
-                textParse.parsingStep();
+                next();
             }else if(action.equals("Sync")) {
                 System.out.println("Touch sync");
                 while(modelResult.getRowCount()>0)
@@ -555,16 +556,48 @@ public class ComplierUI extends JFrame{
 
                 while (modelDeduction.getRowCount()>0)
                     modelDeduction.removeRow(modelDeduction.getRowCount()-1);
-
                 lex  = null;
                 textParse = null;
+                output_buffer = new StringBuffer();
+                textArea.textPane.setForeground(Color.black);
             }
+            else if(action.equals("Build and Run")){
+                Thread thread = new Thread(){
+                    public void run(){
+                        while(old_token!=select||old_token==null){
+                            next();
+                            try {
+                                sleep(30);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
 
+                            String pathname = ".\\output.txt";
+                            chooser.setCurrentDirectory(new File("."));
+                            // show file chooser dialog
+                            int result = chooser.showOpenDialog(ComplierUI.this);
+                            // if image file accepted, set it as icon of the label
+                            if (result == JFileChooser.APPROVE_OPTION)
+                            {
+                                pathname = chooser.getSelectedFile().getPath();
+                            }
+                            File writename = new File(pathname); // 相对路径，如果没有则要建立一个新的output.txt文件
+                            writename.createNewFile(); // 创建新文件
+                            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+                            out.write(output_buffer.toString()); // \r\n即为换行
+                            out.flush(); // 把缓存区内容压入文件
+                            out.close(); // 最后记得关闭文件
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                thread.start();
+            }
             //按钮点击事件
-            JScrollBar bar=paneResult.getVerticalScrollBar();
-            bar.setValue(bar.getMaximum());
-            bar = paneDeduction.getVerticalScrollBar();
-            bar.setValue(bar.getMaximum());
         }
 
     }
@@ -682,4 +715,5 @@ public class ComplierUI extends JFrame{
             this.add(paneTriple);
         }
     }
+
 }
