@@ -8,13 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultTextUI;
 
 
 public class TextLex{
 
     public String text;
-    private DefaultTableModel tbmodel_lex_result;
-    private DefaultTableModel tbmodel_lex_symbol;
+    private DefaultTableModel resultModel;
+    private DefaultTableModel symbolModel;
     private ArrayList<Token> lex_result_stack;
     private ArrayList<HashMap<String, String>> lex_error_stack;
     public List<Symbol> symbolTable=new ArrayList<>();
@@ -30,8 +31,8 @@ public class TextLex{
         lex_result_stack = new ArrayList<Token>();
         lex_error_stack = new ArrayList<HashMap<String, String>>();
         this.text = text;
-        this.tbmodel_lex_result = tb_lex_result;
-		this.tbmodel_lex_symbol = symbolModel;
+        this.resultModel = tb_lex_result;
+		this.symbolModel = symbolModel;
         text_length = text.length();
     }
 
@@ -261,10 +262,10 @@ public class TextLex{
             // 输出普通的标识符
             if(symbolTable.isEmpty()){
                 symbolTable.add(new Symbol(s,row_number,position));
-                tbmodel_lex_symbol.addRow(new String[]{s,row_number+"",position+""});
+                symbolModel.addRow(new String[]{s,row_number+"",position+""});
             } else if(!Symbol.IsInSymbolTableb(s,symbolTable)){
                 symbolTable.add(new Symbol(s,row_number,position));
-                tbmodel_lex_symbol.addRow(new String[]{s,row_number+"",position+""});
+                symbolModel.addRow(new String[]{s,row_number+"",position+""});
             }
             printResult(s, "标识符");
 
@@ -576,40 +577,40 @@ public class TextLex{
 
         if(rs_name.equals("标识符")){
             lex_result_stack.add(new Token(rs_value,TokenType.Identifier,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{ rs_value,TokenType.Identifier.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{ rs_value,TokenType.Identifier.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("关键字")){
             lex_result_stack.add(new Token(rs_value,TokenType.Keyword,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{ rs_value,TokenType.Keyword.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{ rs_value,TokenType.Keyword.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("整数")){
             lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
             lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{ rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{ rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
 
         }
         else if(rs_name.equals("单字符")){
             lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
-        else if(rs_name.equals("双界符")){
+        else if(rs_name.equals("双界符")||rs_value.equals(";")||rs_value.equals(",")){
             lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("运算符")){
             lex_result_stack.add(new Token(rs_value,TokenType.Operator,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Operator.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{rs_value,TokenType.Operator.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("注释")||rs_name.equals("单行注释")) {
             lex_result_stack.add(new Token(rs_value,TokenType.Comment,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Comment.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{rs_value,TokenType.Comment.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else {
             lex_result_stack.add(new Token(rs_value,TokenType.Unknown,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Unknown.toString(),String.valueOf(row_number),String.valueOf(position)});
+            resultModel.addRow(new String[]{rs_value,TokenType.Unknown.toString(),String.valueOf(row_number),String.valueOf(position)});
 
         }
     }
@@ -622,7 +623,7 @@ public class TextLex{
         hashMap.put("rs_value", rs_value+"");
         hashMap.put("rs_name", rs_name+"");
         lex_error_stack.add(hashMap);
-        tbmodel_lex_result.addRow(new String[]{"ERROR，"+rs_name, rs_value});
+
     }
 
 }

@@ -18,16 +18,18 @@ public class TextParse{
     private HashMap<String, String> predictmap;
     private ArrayList<Token> tokenArrayList;
     public  ArrayList<String> deduceArrayList;
-    private DefaultTableModel tbmodel_lex_result;
+    private DefaultTableModel resultModel;
+    private DefaultTableModel errorModel;
 
     private Token preToken;
     private ParserTree parserTree =new ParserTree();
 
-    public TextParse(ArrayList<Token> tokenArrayList, DefaultTableModel tbmodel_lex_result){
+    public TextParse(ArrayList<Token> tokenArrayList, DefaultTableModel resultModel,DefaultTableModel errorModel){
         predictmap = new HashMap<String,String>();
         this.tokenArrayList = tokenArrayList;
         deduceArrayList = new ArrayList<String>();
-        this.tbmodel_lex_result = tbmodel_lex_result;
+        this.resultModel = resultModel;
+        this.errorModel = errorModel;
         getPredictMap();
     }
 
@@ -62,7 +64,7 @@ public class TextParse{
                 for (int i = deduceArrayList.size()-1; i>-1; i--) {
                     process = process + deduceArrayList.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process, deduceArrayList.get(deduceArrayList.size()-1)+" -> "+right});
+                resultModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process, deduceArrayList.get(deduceArrayList.size()-1)+" -> "+right});
                 // 删掉产生的字符，压入堆栈
                 deduceArrayList.remove(deduceArrayList.size()-1);
                 if(right.equals("$")){
@@ -83,11 +85,11 @@ public class TextParse{
                 for (int i = deduceArrayList.size()-1; i>-1; i--) {
                     process = process+ deduceArrayList.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process, "ERROR!  无法识别的字符"+ tokenArrayList.get(0).getType4P()+"产生式"+leftandinput});
+                resultModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process, "ERROR!  无法识别的字符"+ tokenArrayList.get(0).getType4P()+"产生式"+leftandinput});
                 tokenArrayList.remove(0);
             }
         }
-        //tbmodel_lex_result.addRow(new String[]{});
+        //resultModel.addRow(new String[]{});
     }
 
     public String parsingStep(){
@@ -123,7 +125,7 @@ public class TextParse{
                 for (int i = deduceArrayList.size()-1; i>-1; i--) {
                     process = process+ deduceArrayList.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process, deduceArrayList.get(deduceArrayList.size()-1)+" -> "+right});
+                resultModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process, deduceArrayList.get(deduceArrayList.size()-1)+" -> "+right});
                 // 删掉产生的字符，压入堆栈
                 res.append(tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion()+" "+process+" "+ deduceArrayList.get(deduceArrayList.size()-1)+" -> "+right).append('\n');
                 deduceArrayList.remove(deduceArrayList.size()-1);
@@ -146,7 +148,7 @@ public class TextParse{
                 for (int i=deduceArrayList.size()-1;i>-1;i--) {
                     process = process+deduceArrayList.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{tokenArrayList.get(0).getRow()+","+tokenArrayList.get(0).getPostion(),process, "ERROR!  无法识别的字符"+tokenArrayList.get(0).getType4P()+"产生式"+leftandinput});
+                resultModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+tokenArrayList.get(0).getPostion(),process, "ERROR!  无法识别的字符"+tokenArrayList.get(0).getType4P()+"产生式"+leftandinput});
                 tokenArrayList.remove(0);
                 tag = false;
                 */
@@ -156,7 +158,7 @@ public class TextParse{
 //                (right = predictMap.get( leftandinput )) != null
                     if (deduceArrayList.get(deduceArrayList.size()-1).equals( "=" )) {
                         LOGGER.info( "Error, 不能单独输入 ID, 请删除 多余的ID 或 补全。    " + "\n" );
-                        tbmodel_lex_result.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process,"Error, 不能单独输入 ID, 请删除 多余的ID 或 补全。    "  });
+                        errorModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),"Error", "不能单独输入ID,请删除多余的ID或补全."  });
                         //Error error = new Error( "单独输入 ID, 请删除 多余的ID 或 补全", tokenArrayList.get(0).getName()  );
                         //errorList.add( error );
                         //todo 可以这样做么
@@ -183,7 +185,7 @@ public class TextParse{
 //                        Error error = new Error( String.format( "缺少 %s 符号。", absenceString), tokenArrayList.get( 0 ) );
 //                        errorList.add( error );
                         LOGGER.info( "Error, 不能单独输入 ID, 请删除 多余的ID 或 补全。    " + "\n" );
-                        tbmodel_lex_result.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),process,"Error, 不能单独输入 ID, 请删除 多余的ID 或 补全。    "  });
+                        errorModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),"Error"," 不能单独输入ID,请删除多余的ID或补全. "  });
 
                         //todo 这里应该向 input_cache增加一个 token
                         tokenArrayList.add( 0, new Token( absenceString, Keyword, tokenArrayList.get( 0 ).getRow(), tokenArrayList.get( 0 ).getRow(),0,0) );
@@ -243,7 +245,7 @@ public class TextParse{
 //                LOGGER.info( "Error, 不存在该表项, 恐慌模式将删除该token：    " + leftandinput + "  ,token info: " + tokenArrayList.get( 0 ) + "\n" );
 //                Error error = new Error( "Error, 不存在该表项, 恐慌模式将删除该token", tokenArrayList.get( 0 ) );
                     LOGGER.info( "Error,多余 token：    " + leftandinput + "  ,token info: " + tokenArrayList.get( 0 ) + "\n" );
-                    tbmodel_lex_result.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),"Error","多余token"});
+                    errorModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),"Error","多余token"});
                     tokenArrayList.remove(0);
                     //Error error = new Error( "多余 token", tokenArrayList.get( 0 ) );
 

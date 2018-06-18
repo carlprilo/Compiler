@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1105e9-efa8-4ecf-8691-c1b350eaaa4a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ComplierUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComplierUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ldylex/TextLex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ldylex/TextLex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parse/ParserTree.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parse/TextParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse/TextParse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ParserNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ParserNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ParserTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ParserTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Symbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/Symbol.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,19 +22,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="546" column="38" selection-start-line="546" selection-start-column="38" selection-end-line="546" selection-end-column="38" />
+            <state relative-caret-position="359">
+              <caret line="628" lean-forward="true" selection-start-line="628" selection-end-line="628" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5884#5885#0" expanded="true" />
                 <element signature="e#5930#5931#0" expanded="true" />
                 <element signature="e#12779#12780#0" expanded="true" />
                 <element signature="e#12814#12815#0" expanded="true" />
-                <element signature="e#20018#20019#0" expanded="true" />
-                <element signature="e#20069#20070#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,8 +80,8 @@
       <file leaf-file-name="TextLex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2567">
-              <caret line="611" column="88" selection-start-line="611" selection-start-column="88" selection-end-line="611" selection-end-column="88" />
+            <state relative-caret-position="394">
+              <caret line="598" column="79" selection-start-line="598" selection-start-column="79" selection-end-line="598" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,17 +104,17 @@
       <file leaf-file-name="UITest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UITest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="35" column="52" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
+            <state relative-caret-position="556">
+              <caret line="41" column="39" lean-forward="true" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextParse.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TextParse.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/parse/TextParse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="278" selection-start-line="278" selection-end-line="278" />
+            <state relative-caret-position="1136">
+              <caret line="160" column="125" selection-start-line="160" selection-start-column="125" selection-end-line="160" selection-end-column="125" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,8 +125,8 @@
       <file leaf-file-name="Token.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ldylex/Token.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="90" column="34" selection-start-line="90" selection-start-column="34" selection-end-line="90" selection-end-column="34" />
+            <state relative-caret-position="1121">
+              <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -152,9 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Sync</find>
-      <find>partIndex</find>
-      <find>input_cache</find>
       <find>双</find>
       <find>focus</find>
       <find>color</find>
@@ -178,16 +168,19 @@
       <find>Class</find>
       <find>class</find>
       <find>build</find>
-      <find>inpurt_cache</find>
       <find>内存</find>
-      <find>TextLex</find>
       <find>200</find>
+      <find>panel_symbol</find>
+      <find>lex</find>
+      <find>inpurt_cache</find>
+      <find>TextLex</find>
+      <find>Error</find>
     </findStrings>
     <replaceStrings>
       <replace>ID</replace>
       <replace>inpurt_cache</replace>
-      <replace>input_cache</replace>
       <replace>getType4P()</replace>
+      <replace>input_cache</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -228,10 +221,10 @@
         <option value="$PROJECT_DIR$/src/ldylex/Token.java" />
         <option value="$PROJECT_DIR$/src/parse/ParserTree.java" />
         <option value="$PROJECT_DIR$/src/semantic/ParserTree.java" />
-        <option value="$PROJECT_DIR$/src/parse/TextParse.java" />
         <option value="$PROJECT_DIR$/src/semantic/Symbol.java" />
-        <option value="$PROJECT_DIR$/src/ldylex/TextLex.java" />
         <option value="$PROJECT_DIR$/src/ComplierUI.java" />
+        <option value="$PROJECT_DIR$/src/ldylex/TextLex.java" />
+        <option value="$PROJECT_DIR$/src/parse/TextParse.java" />
       </list>
     </option>
   </component>
@@ -456,12 +449,12 @@
       <workItem from="1529313435825" duration="248000" />
       <workItem from="1529327865675" duration="1410000" />
       <workItem from="1529338622808" duration="88000" />
-      <workItem from="1529338800627" duration="13366000" />
+      <workItem from="1529338800627" duration="16783000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78898000" />
+    <option name="totallyTimeSpent" value="82315000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
@@ -477,9 +470,9 @@
       <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32923076" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.66979164" visible="true" weight="0.42461538" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.66979164" visible="true" weight="0.12820514" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" visible="true" weight="0.0" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.22153845" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.07487179" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.889989" visible="true" weight="0.1959707" />
@@ -741,44 +734,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ldylex/TokenType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/semantic/ParserNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="35" column="52" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ldylex/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="90" column="34" selection-start-line="90" selection-start-column="34" selection-end-line="90" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parse/TextParse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="278" selection-start-line="278" selection-end-line="278" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -802,28 +761,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
+    <entry file="file://$PROJECT_DIR$/src/ldylex/TokenType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2567">
-          <caret line="611" column="88" selection-start-line="611" selection-start-column="88" selection-end-line="611" selection-end-column="88" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="57">
+          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="546" column="38" selection-start-line="546" selection-start-column="38" selection-end-line="546" selection-end-column="38" />
+        <state relative-caret-position="359">
+          <caret line="628" lean-forward="true" selection-start-line="628" selection-end-line="628" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5884#5885#0" expanded="true" />
             <element signature="e#5930#5931#0" expanded="true" />
             <element signature="e#12779#12780#0" expanded="true" />
             <element signature="e#12814#12815#0" expanded="true" />
-            <element signature="e#20018#20019#0" expanded="true" />
-            <element signature="e#20069#20070#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ldylex/Token.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="598" column="79" selection-start-line="598" selection-start-column="79" selection-end-line="598" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="41" column="39" lean-forward="true" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parse/TextParse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1136">
+          <caret line="160" column="125" selection-start-line="160" selection-start-column="125" selection-end-line="160" selection-end-column="125" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
