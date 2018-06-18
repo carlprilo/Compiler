@@ -1,78 +1,53 @@
 package semantic;
 
-import java.util.ArrayList;
-import java.util.List;
+import ldylex.TokenType;
 
-//import java.util.HashMap;
-//import java.util.Map;
 
-public class Symbol {
-	int no;
-	private String name;
-	private char type;//N代表非终结符，T代表终结符
-	private String higher_name;//高层结构的符号
-	public List<String> first;
-	public List<String> follow;
-//	public Map<String,String> attribute;
-//	public List<String> select; 产生式才有可选集
-	
-	public Symbol(int no, String name, char type) {
-		super();
-		this.no=no;
-		this.name = name;
-		this.type=type;
-		this.first = new ArrayList<String>();
-//		this.attribute=new HashMap<String,String>(); 
-		
-		if(type=='N'){
-			this.follow = new ArrayList<String>();
-//			this.select = new ArrayList<String>();
-		}else if(type=='T'){
-			this.first.add(name);//非终结符的first集只包含它自身
-			this.follow = null;
-//			this.select = null;
-		}else{
-			throw new IllegalArgumentException("非法的符号类型");
-		}
-	}
-	
-	public Symbol(int no, String name, char type, String higher_name){
-		this(no, name, type);
-		this.higher_name=higher_name;
-	}
+public class Symbol
+{
+    public String name;
+    public TokenType tokentype;
+    public int attributevalue;
+    public int[] linenumbers;
+    public int[] linepositions;
+    public int count;
+    Symbol[] SymbolTable = new Symbol[100];//符号表，暂定最多100项
 
-	public String getName() {
-		return name;
-	}
-	
-	public String getHigher_name() {
-		return higher_name;
-	}
+    public Symbol()
+    {
+        name = "";
+        tokentype = TokenType.Identifier;
+        attributevalue = -9999999;
+        linenumbers = new int[100];
+        linepositions = new int[100];
+        count = 0;
+    }
 
-	public boolean isTerminal(){
-		if(type=='N')
-			return false;
-		else
-			return true;
-	}
-	
-	public boolean has(String arr_name, String sym_name){
-		List<String> arr=null;
-		
-		if(arr_name.toUpperCase().equals("FIRST"))
-			arr=this.first;
-		else if(arr_name.toUpperCase().equals("FOLLOW"))
-			arr=this.follow;
-//		else if(arr_name.toUpperCase().equals("SELECT"))
-//			arr=this.select;
-		else
-			throw new IllegalArgumentException("非法的集合名");
-		
-		for(int i=0;i<arr.size();i++){
-			if(arr.get(i).equals(sym_name))
-				return true;
-		}
-		
-		return false;
-	}
+    public Symbol(String idname, int initialline, int initialcolumn)
+    {
+        name = idname;
+        tokentype = TokenType.Identifier;
+        attributevalue = -9999999;
+        linenumbers = new int[100];
+        linepositions = new int[100];
+        linenumbers[0] = initialline;
+        linepositions[0] = initialcolumn;
+        count = 1;
+    }
+    public Symbol IsInSymbolTable(String str)
+    {
+        int i = 0;
+        Symbol found = null;
+        for (Symbol item : SymbolTable)
+        {
+            i++;
+            if (str == item.name.toString())
+            {
+                found = item;
+                break;
+            }
+        }
+        return found;
+    }
+
 }

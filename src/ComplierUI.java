@@ -1,6 +1,7 @@
+import javafx.concurrent.Task;
 import ldylex.TextLex;
 import ldylex.Token;
-import parsing.TextParse;
+import parse.TextParse;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -84,7 +84,7 @@ public class ComplierUI extends JFrame{
 
             System.out.println(old_token.getType());
 
-            switch (old_token.getType()) {
+            switch (Token.getTokenDetailType(old_token)) {
                 case "NUM":
                     StyleConstants.setForeground(attr, Color.blue);
                     break;
@@ -113,6 +113,10 @@ public class ComplierUI extends JFrame{
                 case "else":
                 case "while":
                     StyleConstants.setForeground(attr, Color.ORANGE);
+                    break;
+                case "KEY":
+                    StyleConstants.setForeground(attr,Color.yellow);
+                    break;
             }
             d.setCharacterAttributes(old_token.getBegin(), old_token.getName().length(), attr, false);
 
@@ -136,6 +140,10 @@ public class ComplierUI extends JFrame{
                 output_buffer = new StringBuffer();
             output_buffer.append(temp);
         }
+        JScrollBar bar = paneResult.getVerticalScrollBar();
+        bar.setValue(bar.getMaximum());
+        bar = paneDeduction.getVerticalScrollBar();
+        bar.setValue(bar.getMaximum());
     }
 
     public ComplierUI()
@@ -471,20 +479,17 @@ public class ComplierUI extends JFrame{
     }
 
     //toolbar按钮作用（工具栏）
-    class toolAction extends AbstractAction
-    {
-        public toolAction(String name, Icon icon)
-        {
+    class toolAction extends AbstractAction {
+        public toolAction(String name, Icon icon) {
             putValue(Action.NAME, name);
             putValue(Action.SMALL_ICON, icon);
-            putValue(Action.SHORT_DESCRIPTION, name+"");//简介
+            putValue(Action.SHORT_DESCRIPTION, name + "");//简介
         }
 
-        public void actionPerformed(ActionEvent event)
-        {
+        public void actionPerformed(ActionEvent event) {
             String action = getValue(Action.NAME).toString();
             System.out.println(action + " selected.......");
-            if(action.equals("Run")){
+            if (action.equals("Run")) {
 
                 //add
                 //textArea.textPane.select(10,29);
@@ -493,44 +498,75 @@ public class ComplierUI extends JFrame{
                 String text = textArea.textPane.getText();
                 System.out.println("lex start");
                 System.out.println(text);
-                lex = new TextLex(text,modelResult,null);
+                lex = new TextLex(text, modelResult, null);
                 lex.scannerAll();
                 System.out.println("lex finish");
-                ArrayList<Token> lex_result_stack =lex.get_Lex_Result();
-                textParse = new TextParse(lex_result_stack,modelDeduction);
+                ArrayList<Token> lex_result_stack = lex.get_Lex_Result();
+                textParse = new TextParse(lex_result_stack, modelDeduction);
                 textParse.parsing();
-                System.out.println("parsing finsished");
+                System.out.println("parse finsished");
 
                 //todo
 //                SemanticAnalyse semanticanalyse = new SemanticAnalyse(text, modelSymbol, null);
-//                semanticanalyse.parsing();
-            }
-            else if(action.equals("Next Step")) {
+//                semanticanalyse.parse();
+            } else if (action.equals("Next Step")) {
                 next();
-            }else if(action.equals("Sync")) {
+            } else if (action.equals("Sync")) {
                 System.out.println("Touch sync");
-                while(modelResult.getRowCount()>0)
-                    modelResult.removeRow(modelResult.getRowCount()-1);
+                while (modelResult.getRowCount() > 0)
+                    modelResult.removeRow(modelResult.getRowCount() - 1);
 
-                while (modelDeduction.getRowCount()>0)
-                    modelDeduction.removeRow(modelDeduction.getRowCount()-1);
-                lex  = null;
+                while (modelDeduction.getRowCount() > 0)
+                    modelDeduction.removeRow(modelDeduction.getRowCount() - 1);
+                lex = null;
                 textParse = null;
                 output_buffer = new StringBuffer();
                 textArea.textPane.setForeground(Color.black);
-            }
-            else if(action.equals("Build and Run")) {
-                Thread thread = new Thread() {
+            } else if (action.equals("Build and Run")) {
+
+                System.out.println("hahah");
+//                Task<Void> progressTask = new Task<Void>() {
+//                    @Override
+//                    protected Void call() throws Exception {
+//                        System.out.println("in");
+////                        do {
+////                            next();
+////                            try {
+////                                sleep(200);
+////
+////                            } catch (InterruptedException e) {
+////                                e.printStackTrace();
+////                            }
+////                        } while (old_token != select && select != null);
+////                        try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
+////                            String pathname = ".\\output.txt";
+////                            chooser.setCurrentDirectory(new File("."));
+////                            int result = chooser.showOpenDialog(ComplierUI.this);
+////                            if (result == JFileChooser.APPROVE_OPTION) {
+////                                pathname = chooser.getSelectedFile().getPath();
+////                            }
+////                            File writename = new File(pathname);
+////                            writename.createNewFile();
+////                            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+////                            out.write(output_buffer.toString());
+////                            out.flush();
+////                            out.close();
+////                        } catch (Exception e) {
+////                            e.printStackTrace();
+////                        }
+////                        updateMessage("Finish");
+//                        return null;
+//                    }
+//                };
+//                new Thread(progressTask).run();
+                new Thread(new Runnable() {
+                    @Override
                     public void run() {
+                        System.out.println("in");
                         do {
                             next();
                             try {
                                 sleep(200);
-
-                                JScrollBar bar = paneResult.getVerticalScrollBar();
-                                bar.setValue(bar.getMaximum());
-                                bar = paneDeduction.getVerticalScrollBar();
-                                bar.setValue(bar.getMaximum());
 
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
@@ -553,8 +589,7 @@ public class ComplierUI extends JFrame{
                             e.printStackTrace();
                         }
                     }
-                };
-                thread.start();
+                }).start();
             }
         }
     }
@@ -580,18 +615,13 @@ public class ComplierUI extends JFrame{
             panel_right.add("South", panel_message);
             panel_right.updateUI();//更新UI
             //按钮点击事件
-            //
-            //
-            //
-            //待添加
-            //
         }
     }
 
     //词法分析
     class LexicalTable extends JPanel
     {
-        private String[] columnNames = { "Token","Class", "Line","Position"};
+        private String[] columnNames = { "Token","Type", "Line","Position"};
         private Object[][] cells = {
         };
 

@@ -1,4 +1,4 @@
-package parsing;
+package parse;
 
 public class ParserTree {
 }

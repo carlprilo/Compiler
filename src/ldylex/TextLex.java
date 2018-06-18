@@ -454,7 +454,6 @@ public class TextLex{
         char ch = text.charAt(++i);
         String s = arg0;
         if (ch=='+'){
-            // 输出运算符
             s = s+ch;
             printResult(s, "运算符");
             return ++i;
@@ -462,12 +461,10 @@ public class TextLex{
 
         else if(ch=='='){
             s = s+ch;
-            // 输出运算符
             printResult(s, "运算符");
             return ++i;
         }
         else{
-            // 输出运算符
             printResult(s, "运算符");
             return i;
         }
@@ -502,19 +499,16 @@ public class TextLex{
         String s = arg0;
         if (ch=='-'){
             s = s+ch;
-            // 输出运算符
             printResult(s, "运算符");
             return ++i;
         }
 
         else if(ch=='='){
             s = s+ch;
-            // 输出运算符
             printResult(s, "运算符");
             return ++i;
         }
         else{
-            // 输出运算符
             printResult(s, "运算符");
             return i;
         }
@@ -526,19 +520,16 @@ public class TextLex{
         String s = arg0;
         if (ch=='='){
             s = s+ch;
-            // 输出运算符
             printResult(s, "运算符");
             return ++i;
         }
 
         else if(ch=='>'){
             s = s+ch;
-            // 输出运算符
             printResult(s, "运算符");
             return ++i;
         }
         else{
-            // 输出运算符
             printResult(s, "运算符");
             return i;
         }
@@ -550,19 +541,16 @@ public class TextLex{
         char ch = text.charAt(++i);
         if (ch=='='){
             s = s+ch;
-            // 输出运算符
             printResult(s, "运算符");
             return ++i;
         }
 
         else if(ch=='<'){
             s = s+ch;
-            // 输出运算符
             printResult(s, "运算符");
             return ++i;
         }
         else{
-            // 输出运算符
             printResult(s, "运算符");
             return i;
         }
@@ -572,29 +560,42 @@ public class TextLex{
     public void printResult(String rs_value, String rs_name){
 
         if(rs_name.equals("标识符")){
-            lex_result_stack.add(new Token(rs_value,"ID",row_number,position,partIndex,partIndex+rs_value.length()));
+            lex_result_stack.add(new Token(rs_value,TokenType.Identifier,row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{ rs_value,"ID",String.valueOf(row_number),String.valueOf(position)});
         }
+        else if(rs_name.equals("关键字")){
+            lex_result_stack.add(new Token(rs_value,TokenType.Keyword,row_number,position,partIndex,partIndex+rs_value.length()));
+            tbmodel_lex_result.addRow(new String[]{ rs_value,"KEY",String.valueOf(row_number),String.valueOf(position)});
+        }
         else if(rs_name.equals("整数")){
-            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position,partIndex,partIndex+rs_value.length()));
+            lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
         }
         else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
-            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position,partIndex,partIndex+rs_value.length()));
+            lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{ rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
 
         }
         else if(rs_name.equals("单字符")){
-            lex_result_stack.add(new Token(rs_value,"CHAR",row_number,position,partIndex,partIndex+rs_value.length()));
+            lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{rs_value,"CHAR",String.valueOf(row_number),String.valueOf(position)});
         }
-        else if(rs_name.equals("字符串")){
-            lex_result_stack.add(new Token(rs_value,"STR",row_number,position,partIndex,partIndex+rs_value.length()));
+        else if(rs_name.equals("双界符")){
+            lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{rs_value,"STR",String.valueOf(row_number),String.valueOf(position)});
         }
+        else if(rs_name.equals("运算符")){
+            lex_result_stack.add(new Token(rs_value,TokenType.Operator,row_number,position,partIndex,partIndex+rs_value.length()));
+            tbmodel_lex_result.addRow(new String[]{rs_value,"OPE",String.valueOf(row_number),String.valueOf(position)});
+        }
+        else if(rs_name.equals("注释")||rs_name.equals("单行注释")) {
+            lex_result_stack.add(new Token(rs_value,TokenType.Comment,row_number,position,partIndex,partIndex+rs_value.length()));
+            tbmodel_lex_result.addRow(new String[]{rs_value,"COM",String.valueOf(row_number),String.valueOf(position)});
+        }
         else {
-            lex_result_stack.add(new Token(rs_value,rs_value,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,rs_name,String.valueOf(row_number),String.valueOf(position)});
+            lex_result_stack.add(new Token(rs_value,TokenType.Unknown,row_number,position,partIndex,partIndex+rs_value.length()));
+            tbmodel_lex_result.addRow(new String[]{rs_value,"UNK",String.valueOf(row_number),String.valueOf(position)});
+
         }
     }
 

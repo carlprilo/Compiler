@@ -1,4 +1,4 @@
-package parsing;
+package parse;
 
 import java.io.File;
 import java.io.RandomAccessFile;
