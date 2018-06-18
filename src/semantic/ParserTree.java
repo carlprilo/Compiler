@@ -1,10 +1,7 @@
 package semantic;
 
-
-
 import ldylex.Token;
 import ldylex.TokenType;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +32,7 @@ public class ParserTree {
         boolean SemanticHaveError = false;
         public int ThreeAddressCount = 0;
         public int RegisterNo = 0;
-        Symbol SymbolTable = new Symbol();//符号表，暂定最多100项
+        public List<Symbol> symbolTable=new ArrayList<>();
         boolean AllFinish = true;//所有子节点都完成
         boolean IsThisLevel = false;//本层所有结点都完成
 
@@ -84,9 +81,15 @@ public class ParserTree {
 
         public static void main(String[] args) {
                 semantic.ParserTree tree = new ParserTree();
-                tree.BuildParserTree(new Token("3",TokenType.Number,1,1,1,1),4,true);
+                tree.BuildParserTree(new Token("3",TokenType.Number,1,1,0,1),4,true);
         }
 
+        public void ClearParserTree(){
+                ParserTree.clear();//清空语法树
+                Level.clear();
+                ParserCount = 0;
+                RegisterNo = 0;
+        }
         public void BuildParserTree(Token tk, int FomularNumber, boolean isroot)//建立抽象语法树
         {
                 if (isroot) //建立根节点
@@ -133,9 +136,9 @@ public class ParserTree {
                                                 ParserTree.get(TempCount).child[0] = -1;//表明它是叶子节点
                                                 if ((FomularNumber + 1) == 26)//获取ID或NUM的值
                                                 {
-                                                        Symbol found = SymbolTable.IsInSymbolTable(tk.getName());
+                                                        Symbol found = Symbol.IsInSymbolTable(tk.getName(),symbolTable);
                                                         ParserTree.get(TempCount).name = tk.getName();
-                                                        ParserTree.get(TempCount).value = found.attributevalue;
+                                                        //ParserTree.get(TempCount).value = found.attributevalue;
                                                 } else if ((FomularNumber + 1) == 27) {
                                                         ParserTree.get(TempCount).name = tk.getName();
                                                         ParserTree.get(TempCount).value = Double.parseDouble(tk.getName());
@@ -184,7 +187,6 @@ public class ParserTree {
                                 return;
                 }
         }
-
         public void CalculateParserTree(int root)
         {
                 Token oldtk; //用来存上一个token
@@ -213,7 +215,7 @@ public class ParserTree {
                         }
                         case 26://simpleexpr -> ID
                         {
-                                Symbol found = SymbolTable.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name);
+                                Symbol found = Symbol.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name,symbolTable);
                                 if (HaveUnknowToken && found.attributevalue == -9999999)
                                 {
                                         HaveUnknowToken = false;
@@ -239,7 +241,7 @@ public class ParserTree {
                                 CalculateParserTree(ParserTree.get(root).child[2]);
                                 ParserTree.get(ParserTree.get(root).child[0]).value = ParserTree.get(ParserTree.get(root).child[2]).value;
                                 //UpdateValue_forID(sema, position[ParserTree.get(root).child[0]].x, position[ParserTree.get(root).child[0]].y, ParserTree.get(ParserTree.get(root).child[0]).name, ParserTree.get(ParserTree.get(root).child[0]).value, skyBrush);
-                                Symbol found = SymbolTable.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name);
+                                Symbol found = Symbol.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name,symbolTable);
                                 found.attributevalue = (int)ParserTree.get(ParserTree.get(root).child[0]).value;
                                 break;
                         }
@@ -487,30 +489,30 @@ public class ParserTree {
                         {
                                 CalculateThreeAddress(ParserTree.get(root).child[2]);
                                 ParserTree.get(root).label = newLabel();
-                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + ",," + "UNKWON");
+                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + "," + "UNKWON");
                                 CalculateThreeAddress(ParserTree.get(root).child[5]);
                                 int endIfLabel = newLabel();
-                                gen(endIfLabel, "JMP    ,," + "UNKWON");
+                                gen(endIfLabel, "JMP    " + "UNKWON");
                                 CalculateThreeAddress(ParserTree.get(root).child[7]);
-                                gen(endIfLabel, "JMP    ,," + ThreeAddress.size());
+                                gen(endIfLabel, "JMP    " + ThreeAddress.size());
                                 EndIsEmpty = true;
-                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + ",," + ParserTree.get(ParserTree.get(root).child[7]).label);
+                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + "," + ParserTree.get(ParserTree.get(root).child[7]).label);
                                 break;
                         }
                         case 10://whilestmt -> while ( boolexpr ) stmt
                         {
                                 CalculateThreeAddress(ParserTree.get(root).child[2]);
                                 ParserTree.get(root).label = newLabel();
-                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + ",," + "UNKWON");
+                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + "," + "UNKWON");
                                 CalculateThreeAddress(ParserTree.get(root).child[4]);
-                                gen(newLabel(), "JMP    ,," + ParserTree.get(ParserTree.get(root).child[2]).label);
-                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + ",," + ThreeAddress.size());
+                                gen(newLabel(), "JMP    " + ParserTree.get(ParserTree.get(root).child[2]).label);
+                                gen(ParserTree.get(root).label, "JMPF    " + ParserTree.get(ParserTree.get(root).child[2]).place + "," + ThreeAddress.size());
                                 EndIsEmpty = true;
                                 break;
                         }
                         case 26://simpleexpr -> ID
                         {
-                                Symbol found = SymbolTable.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name);
+                                Symbol found = Symbol.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name,symbolTable);
                                 ParserTree.get(root).place = found.name;
                                 break;
                         }
@@ -522,9 +524,9 @@ public class ParserTree {
                         case 11://ID = arithexpr ;
                         {
                                 CalculateThreeAddress(ParserTree.get(root).child[2]);
-                                Symbol found = SymbolTable.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name);
+                                Symbol found = Symbol.IsInSymbolTable(ParserTree.get(ParserTree.get(root).child[0]).name,symbolTable);
                                 ParserTree.get(root).label = newLabel();//新建标号
-                                gen(ParserTree.get(root).label, "MOV    " + found.name + ",," + ParserTree.get(ParserTree.get(root).child[2]).place);
+                                gen(ParserTree.get(root).label, "MOV    " + found.name + "," + ParserTree.get(ParserTree.get(root).child[2]).place);
                                 break;
                         }
                         case 1: //program -> compoundstmt
@@ -654,7 +656,7 @@ public class ParserTree {
                                 {
                                         ParserTree.get(root).label = newLabel();
                                         ParserTree.get(root).place = newRegister(); //给arithexprprime一个新的临时寄存器
-                                        gen(ParserTree.get(root).label, "UMINUS    " + ParserTree.get(root).place + ",," + ParserTree.get(ParserTree.get(root).child[1]).place);
+                                        gen(ParserTree.get(root).label, "UMINUS    " + ParserTree.get(root).place + "," + ParserTree.get(ParserTree.get(root).child[1]).place);
                                 }
                                 else//不为空,根据产生式进行计算
                                 {

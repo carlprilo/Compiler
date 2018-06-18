@@ -1,6 +1,11 @@
 package ldylex;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.StringStack;
+import com.sun.tools.example.debug.tty.TTYResources_zh_CN;
+import semantic.Symbol;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -9,9 +14,10 @@ public class TextLex{
 
     public String text;
     private DefaultTableModel tbmodel_lex_result;
-    //	private DefaultTableModel tbmodel_lex_error;
+    private DefaultTableModel tbmodel_lex_symbol;
     private ArrayList<Token> lex_result_stack;
     private ArrayList<HashMap<String, String>> lex_error_stack;
+    public List<Symbol> symbolTable=new ArrayList<>();
     public int text_length;
     public int row_number=1;
     public int partIndex;
@@ -20,12 +26,12 @@ public class TextLex{
 
     String[] Key = {"int","real","if","then","else","while"};
 
-    public TextLex(String text, DefaultTableModel tb_lex_result, DefaultTableModel tb_lex_error){
+    public TextLex(String text, DefaultTableModel tb_lex_result, DefaultTableModel symbolModel){
         lex_result_stack = new ArrayList<Token>();
         lex_error_stack = new ArrayList<HashMap<String, String>>();
         this.text = text;
         this.tbmodel_lex_result = tb_lex_result;
-//		this.tbmodel_lex_error = tb_lex_error;
+		this.tbmodel_lex_symbol = symbolModel;
         text_length = text.length();
     }
 
@@ -253,7 +259,16 @@ public class TextLex{
         }
         else {
             // 输出普通的标识符
+            if(symbolTable.isEmpty()){
+                symbolTable.add(new Symbol(s,row_number,position));
+                tbmodel_lex_symbol.addRow(new String[]{s,row_number+"",position+""});
+            } else if(!Symbol.IsInSymbolTableb(s,symbolTable)){
+                symbolTable.add(new Symbol(s,row_number,position));
+                tbmodel_lex_symbol.addRow(new String[]{s,row_number+"",position+""});
+            }
             printResult(s, "标识符");
+
+
             return i;
         }
     }
@@ -561,40 +576,40 @@ public class TextLex{
 
         if(rs_name.equals("标识符")){
             lex_result_stack.add(new Token(rs_value,TokenType.Identifier,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{ rs_value,"ID",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{ rs_value,TokenType.Identifier.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("关键字")){
             lex_result_stack.add(new Token(rs_value,TokenType.Keyword,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{ rs_value,"KEY",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{ rs_value,TokenType.Keyword.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("整数")){
             lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
             lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{ rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{ rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
 
         }
         else if(rs_name.equals("单字符")){
             lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,"CHAR",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("双界符")){
             lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,"STR",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("运算符")){
             lex_result_stack.add(new Token(rs_value,TokenType.Operator,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,"OPE",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Operator.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("注释")||rs_name.equals("单行注释")) {
             lex_result_stack.add(new Token(rs_value,TokenType.Comment,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,"COM",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Comment.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else {
             lex_result_stack.add(new Token(rs_value,TokenType.Unknown,row_number,position,partIndex,partIndex+rs_value.length()));
-            tbmodel_lex_result.addRow(new String[]{rs_value,"UNK",String.valueOf(row_number),String.valueOf(position)});
+            tbmodel_lex_result.addRow(new String[]{rs_value,TokenType.Unknown.toString(),String.valueOf(row_number),String.valueOf(position)});
 
         }
     }

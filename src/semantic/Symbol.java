@@ -2,6 +2,7 @@ package semantic;
 
 import ldylex.TokenType;
 
+import java.util.List;
 
 public class Symbol
 {
@@ -11,7 +12,8 @@ public class Symbol
     public int[] linenumbers;
     public int[] linepositions;
     public int count;
-    Symbol[] SymbolTable = new Symbol[100];//符号表，暂定最多100项
+    //Symbol[] SymbolTable = new Symbol[100];//符号表，暂定最多100项
+
 
     public Symbol()
     {
@@ -34,14 +36,14 @@ public class Symbol
         linepositions[0] = initialcolumn;
         count = 1;
     }
-    public Symbol IsInSymbolTable(String str)
+    public static Symbol IsInSymbolTable(String str, List<Symbol>SymbolTable)
     {
         int i = 0;
         Symbol found = null;
         for (Symbol item : SymbolTable)
         {
             i++;
-            if (str == item.name.toString())
+            if (str.equals(item.name.toString()))
             {
                 found = item;
                 break;
@@ -49,5 +51,17 @@ public class Symbol
         }
         return found;
     }
-
+    public static boolean IsInSymbolTableb(String str, List<Symbol>SymbolTable)
+    {
+        int i = 0;
+        for (Symbol item : SymbolTable)
+        {
+            i++;
+            if (str.equals(item.name.toString()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

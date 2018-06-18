@@ -1,4 +1,3 @@
-import javafx.concurrent.Task;
 import ldylex.TextLex;
 import ldylex.Token;
 import parse.TextParse;
@@ -70,7 +69,7 @@ public class ComplierUI extends JFrame{
         System.out.println("This is Next Step");
         if (lex == null) {
             String text = textArea.textPane.getText();
-            lex = new TextLex(text, modelResult, null);
+            lex = new TextLex(text, modelResult, modelSymbol);
             partIndex = 0;
         } else {
             partIndex = 1;
@@ -115,12 +114,10 @@ public class ComplierUI extends JFrame{
                     StyleConstants.setForeground(attr, Color.ORANGE);
                     break;
                 case "KEY":
-                    StyleConstants.setForeground(attr,Color.yellow);
+                    StyleConstants.setForeground(attr,Color.darkGray);
                     break;
             }
             d.setCharacterAttributes(old_token.getBegin(), old_token.getName().length(), attr, false);
-
-
 
         }
         select = lex.scannerStep(partIndex);
@@ -133,9 +130,10 @@ public class ComplierUI extends JFrame{
             if (textParse == null) {
                 ArrayList<Token> lex_result_stack = lex.get_Lex_Result();
                 textParse = new TextParse(lex_result_stack, modelDeduction);
-                textParse.deduce_str.add("program");
+                textParse.deduceArrayList.add("program");
             }
             String temp = textParse.parsingStep();
+            if (output_buffer == null)
             if (output_buffer == null)
                 output_buffer = new StringBuffer();
             output_buffer.append(temp);
@@ -273,8 +271,6 @@ public class ComplierUI extends JFrame{
         //配置icon
         url = UITest.class.getResource("/next.png");
         ImageIcon icon_next = new ImageIcon(url);
-        url = UITest.class.getResource("/build.png");
-        ImageIcon icon_build = new ImageIcon(url);
         url = UITest.class.getResource("/run.png");
         ImageIcon icon_run = new ImageIcon(url);
         url = UITest.class.getResource("/build_run.png");
@@ -284,7 +280,6 @@ public class ComplierUI extends JFrame{
 
 
         Action nextAction = new toolAction("Next Step", icon_next);
-        Action buildAction = new toolAction("Build", icon_build);
         Action runAction = new toolAction("Run", icon_run);
         Action brAction= new toolAction("Build and Run",icon_b_r);
         Action syncAction= new toolAction("Sync",icon_sync);
@@ -294,7 +289,6 @@ public class ComplierUI extends JFrame{
         JToolBar bar = new JToolBar();
         bar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         bar.add(nextAction);
-        bar.add(buildAction);
         bar.add(runAction);
         bar.add(brAction);
         bar.addSeparator();
@@ -339,6 +333,7 @@ public class ComplierUI extends JFrame{
 
 
 
+
         //输出语法树，符号表，三地址指令
         panel_right = new JPanel();
         panel_right.setBackground(Color.LIGHT_GRAY);
@@ -350,28 +345,19 @@ public class ComplierUI extends JFrame{
         outputbar.setBorder(BorderFactory.createEtchedBorder());
         outputbar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton istree = new JButton("Tree");
-        JButton istable = new JButton("Table");
-        JButton isaddress = new JButton("Triples");
-        ChangeAction stree = new ChangeAction("Tree");
-        ChangeAction stable = new ChangeAction("Table");
-        ChangeAction saddress = new ChangeAction("Triples");
-        istree.addActionListener(stree);
-        istable.addActionListener(stable);
-        isaddress.addActionListener(saddress);
 
-        outputbar.add(istree);
-        outputbar.add(istable);
-        outputbar.add(isaddress);
+
         panel_right.add("North",outputbar);
 
-        panel_south2.setPreferredSize(new Dimension(myWIDTH/3,myHEIGHT/2));
+        panel_south2.setPreferredSize(new Dimension(myWIDTH/3,myHEIGHT/3));
+
         panel_right.add("Center", panel_south2);
 
         panel_message.setBackground(Color.WHITE);//报错栏
-        panel_message.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/5));
+        panel_message.setPreferredSize(new Dimension(myWIDTH/3-6,myHEIGHT/3));
         panel_message.setBorder(BorderFactory.createEtchedBorder());
         panel_right.add("South", panel_message);
+
 
 
         // the following line is a workaround for bug 4966109
@@ -498,7 +484,7 @@ public class ComplierUI extends JFrame{
                 String text = textArea.textPane.getText();
                 System.out.println("lex start");
                 System.out.println(text);
-                lex = new TextLex(text, modelResult, null);
+                lex = new TextLex(text, modelResult, modelSymbol);
                 lex.scannerAll();
                 System.out.println("lex finish");
                 ArrayList<Token> lex_result_stack = lex.get_Lex_Result();
@@ -515,7 +501,6 @@ public class ComplierUI extends JFrame{
                 System.out.println("Touch sync");
                 while (modelResult.getRowCount() > 0)
                     modelResult.removeRow(modelResult.getRowCount() - 1);
-
                 while (modelDeduction.getRowCount() > 0)
                     modelDeduction.removeRow(modelDeduction.getRowCount() - 1);
                 lex = null;
@@ -523,73 +508,64 @@ public class ComplierUI extends JFrame{
                 output_buffer = new StringBuffer();
                 textArea.textPane.setForeground(Color.black);
             } else if (action.equals("Build and Run")) {
-
-                System.out.println("hahah");
-//                Task<Void> progressTask = new Task<Void>() {
+//                new Thread(new Runnable() {
 //                    @Override
-//                    protected Void call() throws Exception {
+//                    public void run() {
 //                        System.out.println("in");
-////                        do {
-////                            next();
-////                            try {
-////                                sleep(200);
-////
-////                            } catch (InterruptedException e) {
-////                                e.printStackTrace();
-////                            }
-////                        } while (old_token != select && select != null);
-////                        try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
-////                            String pathname = ".\\output.txt";
-////                            chooser.setCurrentDirectory(new File("."));
-////                            int result = chooser.showOpenDialog(ComplierUI.this);
-////                            if (result == JFileChooser.APPROVE_OPTION) {
-////                                pathname = chooser.getSelectedFile().getPath();
-////                            }
-////                            File writename = new File(pathname);
-////                            writename.createNewFile();
-////                            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-////                            out.write(output_buffer.toString());
-////                            out.flush();
-////                            out.close();
-////                        } catch (Exception e) {
-////                            e.printStackTrace();
-////                        }
-////                        updateMessage("Finish");
-//                        return null;
+//                        do {
+//                            next();
+//                            try {
+//                                sleep(200);
+//
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                        } while (old_token != select && select != null);
+//                        try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
+//                            String pathname = ".\\output.txt";
+//                            chooser.setCurrentDirectory(new File("."));
+//                            int result = chooser.showOpenDialog(ComplierUI.this);
+//                            if (result == JFileChooser.APPROVE_OPTION) {
+//                                pathname = chooser.getSelectedFile().getPath();
+//                            }
+//                            File writename = new File(pathname);
+//                            writename.createNewFile();
+//                            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+//                            out.write(output_buffer.toString());
+//                            out.flush();
+//                            out.close();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
 //                    }
-//                };
-//                new Thread(progressTask).run();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("in");
-                        do {
-                            next();
-                            try {
-                                sleep(200);
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        } while (old_token != select && select != null);
-                        try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
-                            String pathname = ".\\output.txt";
-                            chooser.setCurrentDirectory(new File("."));
-                            int result = chooser.showOpenDialog(ComplierUI.this);
-                            if (result == JFileChooser.APPROVE_OPTION) {
-                                pathname = chooser.getSelectedFile().getPath();
-                            }
-                            File writename = new File(pathname);
-                            writename.createNewFile();
-                            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-                            out.write(output_buffer.toString());
-                            out.flush();
-                            out.close();
-                        } catch (Exception e) {
+//                }).start();
+                SwingUtilities.invokeLater(() -> {
+                    System.out.println("in");
+                    do {
+                        next();
+                        try {
+                            sleep(50);
+                        } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                    } while (old_token != select && select != null);
+                    try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
+                        String pathname = ".\\output.txt";
+                        chooser.setCurrentDirectory(new File("."));
+                        int result = chooser.showOpenDialog(ComplierUI.this);
+                        if (result == JFileChooser.APPROVE_OPTION) {
+                            pathname = chooser.getSelectedFile().getPath();
+                        }
+                        File writename = new File(pathname);
+                        writename.createNewFile();
+                        BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+                        out.write(output_buffer.toString());
+                        out.flush();
+                        out.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }).start();
+                });
             }
         }
     }
@@ -659,7 +635,7 @@ public class ComplierUI extends JFrame{
     //符号表
     class SymbolTable extends JPanel
     {
-        private String[] columnNames = { "变量名称", "所属类型", "长度", "内存地址"};
+        private String[] columnNames = { "变量名称", "行号", "位置"};
         private Object[][] cells =
                 {
                         { "我", "是", "符号", "表"},
@@ -673,7 +649,7 @@ public class ComplierUI extends JFrame{
             tableSymbol.setAutoCreateRowSorter(true);
             paneSymbol = new JScrollPane(tableSymbol);
             //scrollPane2.setViewportView(table);
-            paneSymbol.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/3));
+            paneSymbol.setPreferredSize(new Dimension(myWIDTH/3-6,myHEIGHT/3));
             this.add(paneSymbol);
         }
     }
@@ -695,7 +671,7 @@ public class ComplierUI extends JFrame{
             tableTriple = new JTable(modelTriple);
             tableTriple.setAutoCreateRowSorter(true);
             paneTriple = new JScrollPane(tableTriple);
-            paneTriple.setPreferredSize(new Dimension(myWIDTH/3-6,2*myHEIGHT/3));
+            paneTriple.setPreferredSize(new Dimension(myWIDTH/3-6,myHEIGHT/3));
             this.add(paneTriple);
         }
     }
