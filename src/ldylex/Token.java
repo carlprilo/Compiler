@@ -7,11 +7,18 @@ public class Token {
     private int postion;
     private int row;
 
-    public Token(String n, String t,int r,int p) {
+
+
+    private int begin;
+    private int end;
+
+    public Token(String n, String t,int r,int p,int f, int e) {
         this.name = n;
         this.type = t;
         this.row = r;
         this.postion = p;
+        this.begin = f;
+        this.end = e;
     }
 
     public String getName() {
@@ -45,4 +52,21 @@ public class Token {
     public void setRow(int row) {
         this.row = row;
     }
+
+    public int getBegin() {
+        return begin;
+    }
+
+    public void setBegin(int begin) {
+        this.begin = begin;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public void setEnd(int end) {
+        this.end = end;
+    }
+
 }

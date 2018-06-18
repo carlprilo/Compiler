@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class ComplierUI extends JFrame{
 
@@ -42,10 +46,10 @@ public class ComplierUI extends JFrame{
     private TextLex lex;
     private int partIndex;
     private TextParse textParse;
-    private String select;
-    private String from;
-    private String to;
+    private Token select;
+    private Token old_token;
     private String rowNumber;
+
 
     private JFileChooser chooser = new JFileChooser();//选择对话框
 
@@ -480,12 +484,57 @@ public class ComplierUI extends JFrame{
                     lex = new TextLex(text,modelResult,null);
                     partIndex=0;
                 }
-                else { partIndex=1;}
+                else {
+                    partIndex=1;
+                }
 
+                if(select != null) {
+                    old_token = select;
+                    //getAttrFromToken(old_token);
+                    StyledDocument d = textArea.textPane.getStyledDocument();
+                    SimpleAttributeSet attr = new SimpleAttributeSet();
+
+                    System.out.println(old_token.getType());
+
+                    switch (old_token.getType()){
+                        case "NUM" :
+                            StyleConstants.setForeground(attr,Color.blue);
+                            break;
+                        case "ID" :
+                            StyleConstants.setForeground(attr,Color.MAGENTA);
+                            break;
+                        case "=":
+                        case "+":
+                        case "-":
+                        case "*":
+                        case "/":
+                            StyleConstants.setForeground(attr,Color.green);
+                            break;
+                        case "{":
+                        case "}":
+                        case"(":
+                        case")":
+                        case"[":
+                        case"]":
+                            StyleConstants.setForeground(attr,Color.red);
+                            break;
+                        case "int":
+                        case "real":
+                        case "if":
+                        case "then":
+                        case "else" :
+                        case "while":
+                            StyleConstants.setForeground(attr,Color.ORANGE);
+                    }
+
+
+                    d.setCharacterAttributes(old_token.getBegin(),old_token.getName().length() ,attr,false);
+
+
+                }
                 select = lex.scannerStep(partIndex);
-                from  =select.split(" ")[0];
-                to = select.split(" ")[1];
-                textArea.textPane.select(Integer.parseInt(from),Integer.parseInt(to));
+
+                textArea.textPane.select(select.getBegin(),select.getEnd());
                 textArea.textPane.requestFocus();
                 if(textParse==null) {
                     ArrayList<Token> lex_result_stack =lex.get_Lex_Result();
@@ -493,7 +542,6 @@ public class ComplierUI extends JFrame{
                     textParse.deduce_str.add("program");
                 }
                 textParse.parsingStep();
-
             }else if(action.equals("Sync")) {
                 System.out.println("Touch sync");
                 while(modelResult.getRowCount()>0)
@@ -512,7 +560,9 @@ public class ComplierUI extends JFrame{
             bar = paneDeduction.getVerticalScrollBar();
             bar.setValue(bar.getMaximum());
         }
+
     }
+
 
     //切换三个显示
     class ChangeAction extends AbstractAction
@@ -546,7 +596,7 @@ public class ComplierUI extends JFrame{
     //词法分析
     class LexicalTable extends JPanel
     {
-        private String[] columnNames = { "TokenS","Class", "Line","Position"};
+        private String[] columnNames = { "Token","Class", "Line","Position"};
         private Object[][] cells = {
         };
 

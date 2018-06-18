@@ -84,7 +84,7 @@ public class TextLex{
         }
     }
 
-    public String scannerStep(int index){
+    public Token scannerStep(int index){
         System.out.println("before partIndex "+partIndex);
         System.out.println("index "+index);
         String res = " ";
@@ -105,14 +105,16 @@ public class TextLex{
                 position=0;
             } else {
                 position = partIndex-sumpos;
-                res = String.valueOf(partIndex);
+               // res = String.valueOf(partIndex);
                 partIndex=scannerPart(partIndex);
                 tag = false;
-                res = res+" "+String.valueOf(partIndex);
+                //res = res+" "+String.valueOf(partIndex);
+                return lex_result_stack.get(lex_result_stack.size()-1);
             }
         }
         System.out.println("partIndex "+partIndex +"    "+res);
-        return  res;
+        //return  res;
+        return null;
     }
 
     public int scannerPart(int arg0){
@@ -568,30 +570,30 @@ public class TextLex{
 
     // 打印结果
     public void printResult(String rs_value, String rs_name){
-//		tbmodel_lex_result.addRow(new String[]{rs_value, rs_name});
+
         if(rs_name.equals("标识符")){
-            lex_result_stack.add(new Token(rs_value,"ID",row_number,position));
+            lex_result_stack.add(new Token(rs_value,"ID",row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{ rs_value,"ID",String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("整数")){
-            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position));
+            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
         }
         else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
-            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position));
+            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{ rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
 
         }
         else if(rs_name.equals("单字符")){
-            lex_result_stack.add(new Token(rs_value,"CHAR",row_number,position));
+            lex_result_stack.add(new Token(rs_value,"CHAR",row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{rs_value,"CHAR",String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("字符串")){
-            lex_result_stack.add(new Token(rs_value,"STR",row_number,position));
+            lex_result_stack.add(new Token(rs_value,"STR",row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{rs_value,"STR",String.valueOf(row_number),String.valueOf(position)});
         }
         else {
-            lex_result_stack.add(new Token(rs_value,rs_value,row_number,position));
+            lex_result_stack.add(new Token(rs_value,rs_value,row_number,position,partIndex,partIndex+rs_value.length()));
             tbmodel_lex_result.addRow(new String[]{rs_value,rs_name,String.valueOf(row_number),String.valueOf(position)});
         }
     }
