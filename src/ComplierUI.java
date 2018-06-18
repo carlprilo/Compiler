@@ -3,9 +3,11 @@ import parsing.TextParse;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class ComplierUI extends JFrame{
@@ -43,6 +45,11 @@ public class ComplierUI extends JFrame{
     private String from;
     private String to;
     private String rowNumber;
+
+    private JFileChooser chooser = new JFileChooser();//选择对话框
+
+
+
     private void updaetUI(){
         panel_right.remove(panel_south2);//必须要先移除，不然ui不会更新
         panel_right.remove(panel_message);//不然顺序会出错
@@ -56,13 +63,16 @@ public class ComplierUI extends JFrame{
 
     public ComplierUI()
     {
+        //配置文件对话框
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt", "java", "...");
+        chooser.setFileFilter(filter);
 
         addComponentListener(new ComponentAdapter(){
             @Override public void componentResized(ComponentEvent e){
                 myWIDTH = getWidth();//frame的宽
                 myHEIGHT = getHeight();//frame的高
-                System.out.println(myHEIGHT);
-                System.out.println(myWIDTH);
+                //System.out.println(myHEIGHT);
+                //System.out.println(myWIDTH);
                 updaetUI();
             }
         });
@@ -194,11 +204,14 @@ public class ComplierUI extends JFrame{
         ImageIcon icon_sync = new ImageIcon(url);
 
 
+
         Action nextAction = new toolAction("Next Step", icon_next);
         Action buildAction = new toolAction("Build", icon_build);
         Action runAction = new toolAction("Run", icon_run);
         Action brAction= new toolAction("Build and Run",icon_b_r);
         Action syncAction= new toolAction("Sync",icon_sync);
+
+
 
 
         //工具栏
@@ -341,15 +354,89 @@ public class ComplierUI extends JFrame{
         public void actionPerformed(ActionEvent event)
         {
             //按钮点击事件
-            //
-            //
-            //
-            //待添加
-            //
-            //
-            //
+
             String action = getValue(Action.NAME).toString();
             System.out.println(action + " selected.......");
+
+            if (action == "Open") {
+                System.out.println("读取文件");
+
+                String pathname = ".\\input.txt";//默认路径//绝对路径"D:\\test.txt"
+
+                chooser.setCurrentDirectory(new File("."));
+                // show file chooser dialog
+                int result = chooser.showOpenDialog(ComplierUI.this);
+                // if image file accepted, set it as icon of the label
+                if (result == JFileChooser.APPROVE_OPTION)
+                {
+                    pathname = chooser.getSelectedFile().getPath();
+                }
+
+
+
+                try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
+
+                    /* 读入TXT文件 */
+                    File filename = new File(pathname); // 要读取以上路径的input。txt文件
+                    InputStreamReader reader = new InputStreamReader(
+                            new FileInputStream(filename)); // 建立一个输入流对象reader
+                    BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言
+                    String line = "";
+                    line = br.readLine();
+                    String text = "";
+
+                    //
+                    //处理内容
+                    //
+                    while (line != null) {
+                        text = text + line + "\n";
+                        line = br.readLine(); // 一次读入一行数据
+                    }
+                    textArea.textPane.setText(text);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            if (action == "Save") {
+                System.out.println("存储文件");
+                try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
+
+                    String pathname = ".\\output.txt";
+
+                    chooser.setCurrentDirectory(new File("."));
+                    // show file chooser dialog
+                    int result = chooser.showOpenDialog(ComplierUI.this);
+                    // if image file accepted, set it as icon of the label
+                    if (result == JFileChooser.APPROVE_OPTION)
+                    {
+                        pathname = chooser.getSelectedFile().getPath();
+                    }
+
+
+                    /* 写入Txt文件 */
+
+                    File writename = new File(pathname); // 相对路径，如果没有则要建立一个新的output。txt文件
+                    writename.createNewFile(); // 创建新文件
+                    BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+                    String text = textArea.textPane.getText();
+                    //
+                    //
+                    //
+                    //待添加
+                    //
+                    //
+                    //
+                    out.write(text); // \r\n即为换行
+                    out.flush(); // 把缓存区内容压入文件
+                    out.close(); // 最后记得关闭文件
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
         }
     }
