@@ -565,11 +565,11 @@ public class TextLex{
 			tbmodel_lex_result.addRow(new String[]{"ID", rs_value});
 		}
 		else if(rs_name.equals("整数")){
-			lex_result_stack.add("int");
+			lex_result_stack.add("NUM");
 			tbmodel_lex_result.addRow(new String[]{"int", rs_value});
 		}
 		else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
-			lex_result_stack.add("real");
+			lex_result_stack.add("NUM");
 			tbmodel_lex_result.addRow(new String[]{"real", rs_value});
 
 		}

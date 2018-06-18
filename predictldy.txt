@@ -20,15 +20,13 @@ whilestmt#while ->  while ( boolexpr ) stmt
 assgstmt#ID -> ID = arithexpr ;
 decl#int -> type list ;
 decl#real -> type list ;
-type#int -> int
-type#real -> real
+type#NUM -> NUM;
 list#ID -> ID list1
 list1#, -> , list
 list1#; -> $
 boolexpr#ID -> arithexpr boolop arithexpr
 boolexpr#( -> arithexpr boolop arithexpr
-boolexpr#int -> arithexpr boolop arithexpr
-boolexpr#real -> arithexpr boolop arithexpr
+boolexpr#NUM -> arithexpr boolop arithexpr
 boolop#< -> <
 boolop#> -> >
 boolop#<= -> <=
@@ -37,8 +35,7 @@ boolop#== -> ==
 arithexpr#; -> multexpr arithexprprime
 arithexpr#( -> multexpr arithexprprime
 arithexpr#ID -> multexpr arithexprprime
-arithexpr#int -> multexpr arithexprprime
-arithexpr#real -> multexpr arithexprprime
+arithexpr#NUM -> multexpr arithexprprime
 arithexprprime#+ -> + multexpr arithexprprime
 arithexprprime#- -> - multexpr arithexprprime
 arithexprprime#) -> $
@@ -50,8 +47,7 @@ arithexprprime#== -> $
 arithexprprime#>= -> $
 multexpr#) -> simpleexpr multexprprime
 multexpr#ID -> simpleexpr multexprprime
-multexpr#int -> simpleexpr multexprprime
-multexpr#real -> simpleexpr multexprprime
+multexpr#NUM -> simpleexpr multexprprime
 multexprprime#* -> * simpleexpr multexprprime
 multexprprime#/ -> / simpleexpr multexprprime
 multexprprime#) -> $
@@ -64,8 +60,6 @@ multexprprime#== -> $
 multexprprime#+ -> $
 multexprprime#- -> $
 simpleexpr#ID -> ID
-simpleexpr#int -> int
-simpleexpr#real -> real
+simpleexpr#NUM -> NUM
 simpleexpr#( -> ( arithexpr )
-NUM#int -> int
-NUM#real -> real
+ m

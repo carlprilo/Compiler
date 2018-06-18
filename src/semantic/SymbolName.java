@@ -1,7 +1,7 @@
 package semantic;
 
 public class SymbolName {
-	public static String S="S";
+	public static String program="program";
 	public static String func="func";
 	public static String type="type";
 	public static String id="id";

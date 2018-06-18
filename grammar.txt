@@ -11,8 +11,7 @@ ifstmt ->  if ( boolexpr ) then stmt else stmt
 whilestmt ->  while ( boolexpr ) stmt
 assgstmt ->  ID = arithexpr ;
 decl -> type list ;
-type -> int
-type -> real
+type -> NUM
 list -> ID list1
 list1 -> , list
 list1 -> $

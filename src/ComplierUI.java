@@ -194,14 +194,11 @@ public class ComplierUI extends JFrame{
         ImageIcon icon_sync = new ImageIcon(url);
 
 
-
         Action nextAction = new toolAction("Next Step", icon_next);
         Action buildAction = new toolAction("Build", icon_build);
         Action runAction = new toolAction("Run", icon_run);
         Action brAction= new toolAction("Build and Run",icon_b_r);
         Action syncAction= new toolAction("Sync",icon_sync);
-
-
 
 
         //工具栏
