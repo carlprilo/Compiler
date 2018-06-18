@@ -1,22 +1,22 @@
 package parsing;
 
+import ldylex.Token;
+
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class TextParse{
-    HashMap<String, String> predictmap;
-    ArrayList<String> input_cache;
+    private HashMap<String, String> predictmap;
+    private ArrayList<Token> input_cache;
     public  ArrayList<String> deduce_str;
-    DefaultTableModel tbmodel_lex_result;
+    private DefaultTableModel tbmodel_lex_result;
 
 
-
-    public TextParse(ArrayList<String> input_cache, DefaultTableModel tbmodel_lex_result){
-        predictmap = new HashMap<String, String>();
+    public TextParse(ArrayList<Token> input_cache, DefaultTableModel tbmodel_lex_result){
+        predictmap = new HashMap<String,String>();
         this.input_cache = input_cache;
         deduce_str = new ArrayList<String>();
         this.tbmodel_lex_result = tbmodel_lex_result;
@@ -35,7 +35,7 @@ public class TextParse{
 
             // 输入缓冲区与推导符号串第一个字符相等的话，删掉
             try {
-                if(input_cache.get(0).equals(deduce_str.get(deduce_str.size()-1))){
+                if(input_cache.get(0).getType().equals(deduce_str.get(deduce_str.size()-1))){
                     input_cache.remove(0);
                     deduce_str.remove(deduce_str.size()-1);
                     continue;
@@ -45,19 +45,16 @@ public class TextParse{
                 e.printStackTrace();
             }
             // 匹配字符
-            leftandinput = deduce_str.get(deduce_str.size()-1)+"-"+input_cache.get(0);
-//			if(input_cache.get(0)==null)
-//			{
-//				leftandinput = leftandinput+"$";
-//			}
+            leftandinput = deduce_str.get(deduce_str.size()-1)+"-"+input_cache.get(0).getType();
+
             // 能够找到匹配的
             if((right=predictmap.get(leftandinput))!=null){
                 // 输出产生式和推导过程
                 process = "";
                 for (int i=deduce_str.size()-1;i>-1;i--) {
-                    process = process+deduce_str.get(i)+" ";
+                    process = process + deduce_str.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{process, deduce_str.get(deduce_str.size()-1)+" -> "+right});
+                tbmodel_lex_result.addRow(new String[]{input_cache.get(0).getRow()+","+input_cache.get(0).getPostion(),process, deduce_str.get(deduce_str.size()-1)+" -> "+right});
                 // 删掉产生的字符，压入堆栈
                 deduce_str.remove(deduce_str.size()-1);
                 if(right.equals("$")){
@@ -70,7 +67,6 @@ public class TextParse{
                         deduce_str.add(arg[i]);
                     }
                 }
-
             }
             // 否则的话报错
             else {
@@ -79,7 +75,7 @@ public class TextParse{
                 for (int i=deduce_str.size()-1;i>-1;i--) {
                     process = process+deduce_str.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{process, "ERROR!  无法识别的字符"+input_cache.get(0)+"产生式"+leftandinput});
+                tbmodel_lex_result.addRow(new String[]{input_cache.get(0).getRow()+","+input_cache.get(0).getPostion(),process, "ERROR!  无法识别的字符"+input_cache.get(0).getType()+"产生式"+leftandinput});
                 input_cache.remove(0);
             }
         }
@@ -97,7 +93,7 @@ public class TextParse{
 
             // 输入缓冲区与推导符号串第一个字符相等的话，删掉
             try {
-                if(input_cache.get(0).equals(deduce_str.get(deduce_str.size()-1))){
+                if(input_cache.get(0).getType().equals(deduce_str.get(deduce_str.size()-1))){
                     input_cache.remove(0);
                     deduce_str.remove(deduce_str.size()-1);
                     continue;
@@ -107,11 +103,8 @@ public class TextParse{
                 e.printStackTrace();
             }
             // 匹配字符
-            leftandinput = deduce_str.get(deduce_str.size()-1)+"-"+input_cache.get(0);
-//			if(input_cache.get(0)==null)
-//			{
-//				leftandinput = leftandinput+"$";
-//			}
+            leftandinput = deduce_str.get(deduce_str.size()-1)+"-"+input_cache.get(0).getType();
+
             // 能够找到匹配的
             if((right=predictmap.get(leftandinput))!=null){
                 // 输出产生式和推导过程
@@ -119,7 +112,7 @@ public class TextParse{
                 for (int i=deduce_str.size()-1;i>-1;i--) {
                     process = process+deduce_str.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{process, deduce_str.get(deduce_str.size()-1)+" -> "+right});
+                tbmodel_lex_result.addRow(new String[]{input_cache.get(0).getRow()+","+input_cache.get(0).getPostion(),process, deduce_str.get(deduce_str.size()-1)+" -> "+right});
                 // 删掉产生的字符，压入堆栈
                 deduce_str.remove(deduce_str.size()-1);
                 if(right.equals("$")){
@@ -132,7 +125,6 @@ public class TextParse{
                         deduce_str.add(arg[i]);
                     }
                 }
-
             }
             // 否则的话报错
             else {
@@ -141,7 +133,7 @@ public class TextParse{
                 for (int i=deduce_str.size()-1;i>-1;i--) {
                     process = process+deduce_str.get(i)+" ";
                 }
-                tbmodel_lex_result.addRow(new String[]{process, "ERROR!  无法识别的字符"+input_cache.get(0)+"产生式"+leftandinput});
+                tbmodel_lex_result.addRow(new String[]{input_cache.get(0).getRow()+","+input_cache.get(0).getPostion(),process, "ERROR!  无法识别的字符"+input_cache.get(0).getType()+"产生式"+leftandinput});
                 input_cache.remove(0);
                 tag = false;
             }
@@ -166,7 +158,6 @@ public class TextParse{
                 symbol = (text_line.split("#")[1]).split("->")[0].trim();
                 right = (text_line.split("#")[1]).split("->")[1].trim();
                 predictmap.put(left+"-"+symbol, right);
-
             }
             predictfile.close();
 

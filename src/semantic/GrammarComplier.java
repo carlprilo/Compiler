@@ -568,13 +568,13 @@ public class GrammarComplier {
 	}
 	
 	// 分析，标识符在内存中的偏移
-	public List<Production> analysis(List<Token> token_list){
+	public List<Production> analysis(List<TokenS> token_S_list){
 		
 		int offset=0;//标识符在内存中的偏移
 		int tno=0;//中间变量的个数
 		int bno=0;//布尔变量的个数
 		
-		token_list.add(new Token("#",null));
+		token_S_list.add(new TokenS("#",null));
 		
 		Stack<Symbol> stack=new Stack<Symbol>();//符号栈
 		Stack<Node> node_stack=new Stack<Node>();
@@ -588,23 +588,23 @@ public class GrammarComplier {
 		int pos=0;//已匹配数目
 		int line=1;//行号
 		
-		while(pos<token_list.size()){
-			Token token=token_list.get(pos);
+		while(pos< token_S_list.size()){
+			TokenS tokenS = token_S_list.get(pos);
 			
-			Symbol input_symbol=getSymbol(token.getName());
+			Symbol input_symbol=getSymbol(tokenS.getName());
 			
 			if(input_symbol==null){//该文法不能识别的输入符号
-				if(token.getName().equals("ENTER")){
+				if(tokenS.getName().equals("ENTER")){
 					line++;
-				}else if(token.getName().equals("ERROR")){
+				}else if(tokenS.getName().equals("ERROR")){
 					ErrorProduction err_pro=new ErrorProduction(-1,stack.get(stack.size()-1).getName(),stack.get(stack.size()-1).getName());
-					err_pro.setError("无法识别的单词\'"+token.getSource()+"\' at line "+line);
-					err_pro.setSolution("跳过错误单词\'"+token.getSource()+"\'");
+					err_pro.setError("无法识别的单词\'"+ tokenS.getSource()+"\' at line "+line);
+					err_pro.setSolution("跳过错误单词\'"+ tokenS.getSource()+"\'");
 					pro_list.add(err_pro);
 				}else{
 					ErrorProduction err_pro=new ErrorProduction(-1,stack.get(stack.size()-1).getName(),stack.get(stack.size()-1).getName());
-					err_pro.setError("无法识别的输入符号\'"+token.getName()+"\' at line "+line);
-					err_pro.setSolution("跳过输入符号\'"+token.getName()+"\'");
+					err_pro.setError("无法识别的输入符号\'"+ tokenS.getName()+"\' at line "+line);
+					err_pro.setSolution("跳过输入符号\'"+ tokenS.getName()+"\'");
 					pro_list.add(err_pro);
 				}
 				
@@ -654,14 +654,14 @@ public class GrammarComplier {
 				
 				Node father=left_node.getFather();
 				
-				father.sons.get(1).attribute.put("name", token_list.get(pos-1).getSource());
+				father.sons.get(1).attribute.put("name", token_S_list.get(pos-1).getSource());
 				father.sons.get(1).attribute.put("type", father.sons.get(0).attribute.get("type"));
 				father.sons.get(1).attribute.put("length", father.sons.get(0).attribute.get("length"));
 				father.sons.get(1).attribute.put("dimension", "0");
 			}else if(leftest.getName().equals("M15_4")){
 				
 				Node father=left_node.getFather();
-				int num=Integer.parseInt(token_list.get(pos-2).getValue());
+				int num=Integer.parseInt(token_S_list.get(pos-2).getValue());
 				int father_dimension=Integer.parseInt(father.attribute.get("dimension"));
 				
 				father.sons.get(0).attribute.put("name", father.attribute.get("name"));
@@ -739,7 +739,7 @@ public class GrammarComplier {
 				
 				father.sons.get(0).attribute.put("type", father.attribute.get("type"));
 				father.sons.get(0).attribute.put("length", father.attribute.get("length"));
-				father.sons.get(0).attribute.put("name", token_list.get(pos-1).getSource());
+				father.sons.get(0).attribute.put("name", token_S_list.get(pos-1).getSource());
 				father.sons.get(0).attribute.put("dimension", "0");
 			}else if(leftest.getName().equals("M17_5")){
 				
@@ -751,7 +751,7 @@ public class GrammarComplier {
 				
 				Node father=left_node.getFather();
 				
-				father.attribute.put("value", token_list.get(pos-1).getValue());
+				father.attribute.put("value", token_S_list.get(pos-1).getValue());
 			}else if(leftest.getName().equals("M57_3")){
 				
 				Node father=left_node.getFather();
@@ -801,7 +801,7 @@ public class GrammarComplier {
 				
 				Node father=left_node.getFather();
 				
-				father.sons.get(0).attribute.put("name", token_list.get(pos-1).getSource());
+				father.sons.get(0).attribute.put("name", token_S_list.get(pos-1).getSource());
 			}else if(leftest.getName().equals("M63_1")){
 				
 				Node father=left_node.getFather();
@@ -1060,7 +1060,7 @@ public class GrammarComplier {
 			if(leftest.isTerminal()){
 				if(leftest.getName().equals(input_symbol.getName())){
 					pos++;//匹配
-				}else if(pos<token_list.size()&&token_list.get(pos+1).getName().equals(leftest.getName())){//error:栈顶的终结符与输入的终结符不匹配
+				}else if(pos< token_S_list.size()&& token_S_list.get(pos+1).getName().equals(leftest.getName())){//error:栈顶的终结符与输入的终结符不匹配
 					
 					ErrorProduction err_pro=new ErrorProduction(-1,leftest.getName(),leftest.getName());//action:弹出此终结符
 					err_pro.setError("栈顶的终结符\'"+leftest.getName()+"\'与输入的终结符\'"+input_symbol.getName()+"\'不匹配 at line "+line);

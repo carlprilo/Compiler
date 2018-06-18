@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1105e9-efa8-4ecf-8691-c1b350eaaa4a" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/ldylex/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ComplierUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComplierUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ldylex/TextLex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ldylex/TextLex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/TextParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/TextParse.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,19 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ComplierUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="734">
-              <caret line="265" column="63" lean-forward="true" selection-start-line="265" selection-start-column="63" selection-end-line="265" selection-end-column="63" />
-              <folding>
-                <element signature="e#2031#2367#0" expanded="true" />
-                <element signature="e#2366#2367#0" expanded="true" />
-                <element signature="e#3259#3260#0" expanded="true" />
-                <element signature="e#3305#3306#0" expanded="true" />
-                <element signature="e#10811#10812#0" expanded="true" />
-                <element signature="e#10846#10847#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="559">
+              <caret line="572" column="35" lean-forward="true" selection-start-line="572" selection-start-column="35" selection-end-line="572" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -41,8 +36,8 @@
       <file leaf-file-name="TextLex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="92" column="29" lean-forward="true" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
+            <state relative-caret-position="790">
+              <caret line="597" lean-forward="true" selection-start-line="597" selection-end-line="597" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,20 +45,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UITest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UITest.java">
+      <file leaf-file-name="TextParse.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/parsing/TextParse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditArea.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/EditArea.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1822">
-              <caret line="57" column="11" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+            <state relative-caret-position="332">
+              <caret line="77" column="119" selection-start-line="77" selection-start-column="119" selection-end-line="77" selection-end-column="119" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,6 +89,8 @@
       <find>Sync</find>
       <find>partIndex</find>
       <find>step</find>
+      <find>input_cache</find>
+      <find>双</find>
     </findStrings>
     <replaceStrings>
       <replace>ID</replace>
@@ -128,7 +119,6 @@
         <option value="$PROJECT_DIR$/src/semantic/MyScanner.java" />
         <option value="$PROJECT_DIR$/src/semantic/SemanticAnalyse.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/parsing/TextParse.java" />
         <option value="$PROJECT_DIR$/src/UITest.java" />
         <option value="$PROJECT_DIR$/hs_err_pid19080.log" />
         <option value="$PROJECT_DIR$/LLtest.txt" />
@@ -138,8 +128,10 @@
         <option value="$PROJECT_DIR$/src/semantic/SymbolName.java" />
         <option value="$PROJECT_DIR$/grammar.txt" />
         <option value="$PROJECT_DIR$/predictldy.txt" />
+        <option value="$PROJECT_DIR$/src/ldylex/Token.java" />
         <option value="$PROJECT_DIR$/src/ldylex/TextLex.java" />
         <option value="$PROJECT_DIR$/src/ComplierUI.java" />
+        <option value="$PROJECT_DIR$/src/parsing/TextParse.java" />
       </list>
     </option>
   </component>
@@ -344,18 +336,18 @@
     <layout>
       <window_info anchor="right" x="1755" y="95" width="136" height="615" id="Palette" order="2" weight="0.19739583" />
       <window_info anchor="bottom" id="TODO" order="4" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49947917" weight="0.32943678" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49947917" weight="0.3285578" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005208" side_tool="true" weight="0.15102041" />
       <window_info anchor="right" id="Maven Projects" order="8" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.66979164" visible="true" weight="0.09742121" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.66979164" weight="0.1843362" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32923076" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.34479466" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.20725884" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.889989" visible="true" weight="0.13113007" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.889989" visible="true" weight="0.13113007" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32858416" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -410,21 +402,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/JFrameTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/Lay.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/Action.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/event/ActionEvent.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Vector.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/event/InvocationEvent.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/java/beans/EventHandler.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/image/ImageObserver.java" />
-    <entry file="file://$PROJECT_DIR$/src/TableTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/demo.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/AbstractAction.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/AbstractButton.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/event/ActionListener.java" />
-    <entry file="file://$PROJECT_DIR$/src/hello.java" />
-    <entry file="file://$PROJECT_DIR$/src/DocAttribute.java" />
     <entry file="file://$PROJECT_DIR$/src/DocTest.java" />
     <entry file="file://$PROJECT_DIR$/src/TextComponentTest.java" />
     <entry file="file://$PROJECT_DIR$/src/test.java" />
@@ -465,13 +442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/TextParse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-463">
-          <caret line="87" column="18" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -502,24 +472,10 @@
       </provider>
     </entry>
     <entry file="jar://C:/Lib/Java/jdk1.8.0_151/src.zip!/java/awt/event/ActionListener.java" />
-    <entry file="file://$PROJECT_DIR$/src/semantic/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/semantic/SymbolName.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EditArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1822">
-          <caret line="57" column="11" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -621,10 +577,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1822">
+          <caret line="57" column="11" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/semantic/Token.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4602">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ldylex/Token.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#363#364#0" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#426#427#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
+            <element signature="e#493#494#0" expanded="true" />
+            <element signature="e#525#526#0" expanded="true" />
+            <element signature="e#556#557#0" expanded="true" />
+            <element signature="e#586#587#0" expanded="true" />
+            <element signature="e#629#630#0" expanded="true" />
+            <element signature="e#667#668#0" expanded="true" />
+            <element signature="e#694#695#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#785#786#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/build.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/build_run.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/cached.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/check.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/close.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/cut.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/error(1).png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/folder_open.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/sync.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/paste.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/next.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/more_vert(1).png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/Icon2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/Icon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ldylex/TextLex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="92" column="29" lean-forward="true" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
+        <state relative-caret-position="790">
+          <caret line="597" lean-forward="true" selection-start-line="597" selection-end-line="597" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -633,15 +670,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ComplierUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="265" column="63" lean-forward="true" selection-start-line="265" selection-start-column="63" selection-end-line="265" selection-end-column="63" />
+        <state relative-caret-position="559">
+          <caret line="572" column="35" lean-forward="true" selection-start-line="572" selection-start-column="35" selection-end-line="572" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/TextParse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="77" column="119" selection-start-line="77" selection-start-column="119" selection-end-line="77" selection-end-column="119" />
           <folding>
-            <element signature="e#2031#2367#0" expanded="true" />
-            <element signature="e#2366#2367#0" expanded="true" />
-            <element signature="e#3259#3260#0" expanded="true" />
-            <element signature="e#3305#3306#0" expanded="true" />
-            <element signature="e#10811#10812#0" expanded="true" />
-            <element signature="e#10846#10847#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

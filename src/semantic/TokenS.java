@@ -3,7 +3,7 @@ package semantic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Token implements Cloneable{
+public class TokenS implements Cloneable{
 	
 	//标识符表
 	static List<String> id_list;
@@ -32,9 +32,9 @@ public class Token implements Cloneable{
 		return source;
 	}
 
-	public Token(){}
+	public TokenS(){}
 	
-	public Token(String name, String source){
+	public TokenS(String name, String source){
 		this.name=name;
 		this.source=source;
 		
@@ -210,9 +210,9 @@ public class Token implements Cloneable{
 		}
 	}
 	
-	public Token clone(){
+	public TokenS clone(){
 		try {
-			return (Token)super.clone();
+			return (TokenS)super.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

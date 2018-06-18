@@ -5,14 +5,10 @@ import java.util.List;
 
 public class MyScanner {
 	
-	String[] keys={"asm",		"auto",		"break",	"case",		"cdecl",
-				   "char",		"const",	"continue",	"default",	"do",
-				   "double",	"else",		"enum",		"extern",	"far",
-				   "float",		"for",		"goto",		"huge",		"if",
-				   "interrupt",	"int",		"long",		"near",		"pascal",
-				   "register",	"return",	"short",	"signed",	"sizeof",
-				   "static",	"struct",	"switch",	"typedef",	"union",
-				   "unsigned",	"void",		"volatile",	"while"};
+	String[] keys={	"break",	"case", "char",		"const",	"continue",		"do",
+				   "double",	"else",		"enum", "float",		"for",		"if",
+				   	"int",		"long", "return",	"short",	"signed",	"sizeof",
+				   "static",	"struct",	"switch","typedef", "unsigned",	"void",		"while"};
 	String[] rwords={"new","delete"};
 	
 	int pos=0;//用来扫描源程序的指针
@@ -23,14 +19,14 @@ public class MyScanner {
 		this.source=source;
 	}
 	
-	public List<Token> execute(){
+	public List<TokenS> execute(){
 		
-		Token.freeId_list();
+		TokenS.freeId_list();
 		
 		char next_char;
 		int begin_pos=0;
 		
-		List<Token> list=new ArrayList<Token>();
+		List<TokenS> list=new ArrayList<TokenS>();
 		
 		while(true){
 			
@@ -54,43 +50,43 @@ public class MyScanner {
 				}else if(next_char==' ' || next_char=='\t'){//E1
 					begin_pos=this.pos;
 				}else if(next_char=='\n' || next_char=='\r'){//E1
-					list.add(new Token("ENTER",null));
+					list.add(new TokenS("ENTER",null));
 					begin_pos=this.pos;
 				}else if(next_char=='('){//E2
-					list.add(new Token("(","("));
+					list.add(new TokenS("(","("));
 					begin_pos=this.pos;
 				}else if(next_char==')'){//E2
-					list.add(new Token(")",")"));
+					list.add(new TokenS(")",")"));
 					begin_pos=this.pos;
 				}else if(next_char=='['){//E2
-					list.add(new Token("[","["));
+					list.add(new TokenS("[","["));
 					begin_pos=this.pos;
 				}else if(next_char==']'){//E2
-					list.add(new Token("]","]"));
+					list.add(new TokenS("]","]"));
 					begin_pos=this.pos;
 				}else if(next_char=='.'){//E2
-					list.add(new Token(".","."));
+					list.add(new TokenS(".","."));
 					begin_pos=this.pos;
 				}else if(next_char=='~'){//E2
-					list.add(new Token("~","~"));
+					list.add(new TokenS("~","~"));
 					begin_pos=this.pos;
 				}else if(next_char=='?'){//E2
-					list.add(new Token("?","?"));
+					list.add(new TokenS("?","?"));
 					begin_pos=this.pos;
 				}else if(next_char==':'){//E2
-					list.add(new Token(":",":"));
+					list.add(new TokenS(":",":"));
 					begin_pos=this.pos;
 				}else if(next_char==','){//E2
-					list.add(new Token(",",","));
+					list.add(new TokenS(",",","));
 					begin_pos=this.pos;
 				}else if(next_char=='{'){//E2
-					list.add(new Token("{","{"));
+					list.add(new TokenS("{","{"));
 					begin_pos=this.pos;
 				}else if(next_char=='}'){//E2
-					list.add(new Token("}","}"));
+					list.add(new TokenS("}","}"));
 					begin_pos=this.pos;
 				}else if(next_char==';'){//E2
-					list.add(new Token(";",";"));
+					list.add(new TokenS(";",";"));
 					begin_pos=this.pos;
 				}else if(next_char=='-'){//EA
 					this.status="EA";
@@ -117,7 +113,7 @@ public class MyScanner {
 				}else if(next_char=='/'){//FA
 					this.status="FA";
 				}else{
-					list.add(new ErrorToken("ERROR","非法的开始字符",next_char+""));
+					list.add(new ErrorTokenS("ERROR","非法的开始字符",next_char+""));
 					begin_pos=this.pos;
 				}
 				
@@ -133,13 +129,13 @@ public class MyScanner {
 				}else if(next_char=='e' || next_char=='E'){//AJ
 					this.status="AJ";
 				}else if(next_char=='u' || next_char=='U'){//AM
-					list.add(new Token("unsigned",source.substring(begin_pos, pos)));
+					list.add(new TokenS("unsigned",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='l' || next_char=='L'){//AN
 					this.status="AN";
 				}else{
-					list.add(new Token(ConstantType.INT,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.INT,source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -151,15 +147,15 @@ public class MyScanner {
 				}else if(next_char=='e' || next_char=='E'){//AJ
 					this.status="AJ";
 				}else if(next_char=='u' || next_char=='U'){//AM
-					list.add(new Token("unsigned",source.substring(begin_pos, pos)));
+					list.add(new TokenS("unsigned",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='l' || next_char=='L'){//AN
 					this.status="AN";
 				}else if(next_char==0){
-					list.add(new Token(ConstantType.INT,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.INT,source.substring(begin_pos, --pos)));
 				}else{
-					list.add(new Token(ConstantType.INT,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.INT,source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -173,15 +169,15 @@ public class MyScanner {
 				}else if(next_char=='e' || next_char=='E'){//AJ
 					this.status="AJ";
 				}else if(next_char=='u' || next_char=='U'){//AM
-					list.add(new Token("unsigned",source.substring(begin_pos, pos)));
+					list.add(new TokenS("unsigned",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='l' || next_char=='L'){//AN
 					this.status="AN";
 				}else if(next_char==0){
-					list.add(new Token(ConstantType.DOUBLE,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.DOUBLE,source.substring(begin_pos, pos)));
 				}else{
-					list.add(new Token(ConstantType.INT,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.INT,source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -189,7 +185,7 @@ public class MyScanner {
 				if((next_char>='0' && next_char<='9') || (next_char>='a' && next_char<='f') || (next_char>='A' && next_char<='F')){//AF
 					this.status="AF";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的十六进制表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的十六进制表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -197,15 +193,15 @@ public class MyScanner {
 				if((next_char>='0' && next_char<='9') || (next_char>='a' && next_char<='f') || (next_char>='A' && next_char<='F')){//AF
 					continue;
 				}else if(next_char=='u' || next_char=='U'){//AM
-					list.add(new Token("unsigned",source.substring(begin_pos, pos)));
+					list.add(new TokenS("unsigned",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='l' || next_char=='L'){//AN
 					this.status="AN";
 				}else if(next_char==0){
-					list.add(new Token(ConstantType.DOUBLE,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.DOUBLE,source.substring(begin_pos, --pos)));
 				}else{
-					list.add(new Token(ConstantType.INT,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.INT,source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -213,7 +209,7 @@ public class MyScanner {
 				if(next_char>='0' && next_char<='9'){//AH
 					this.status="AH";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的小数表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的小数表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -223,17 +219,17 @@ public class MyScanner {
 				}else if(next_char=='e' || next_char=='E'){//AJ
 					this.status="AJ";
 				}else if(next_char=='f' || next_char=='F'){//AQ
-					list.add(new Token(ConstantType.FLOAT,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.FLOAT,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='l' || next_char=='L'){//AR
-					list.add(new Token(ConstantType.LONG_DOUBLE,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.LONG_DOUBLE,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char==0){
-					list.add(new Token(ConstantType.DOUBLE,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.DOUBLE,source.substring(begin_pos, pos)));
 				}else{
-					list.add(new Token(ConstantType.DOUBLE,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.DOUBLE,source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -245,7 +241,7 @@ public class MyScanner {
 				}else if(next_char=='e' || next_char=='E'){//AJ
 					this.status="AJ";
 				}else{
-					list.add(new ErrorToken("ERROR","非法的八进制数表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","非法的八进制数表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -255,7 +251,7 @@ public class MyScanner {
 				}else if(next_char>='0' && next_char<='9'){//AL
 					this.status="AL";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的指数表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的指数表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -263,7 +259,7 @@ public class MyScanner {
 				if(next_char>='0' && next_char<='9'){//AL
 					this.status="AL";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的指数表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的指数表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -271,25 +267,25 @@ public class MyScanner {
 				if(next_char>='0' && next_char<='9'){//AL
 					continue;
 				}else if(next_char=='f' || next_char=='F'){//AQ
-					list.add(new Token(ConstantType.FLOAT,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.FLOAT,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='l' || next_char=='L'){//AR
-					list.add(new Token(ConstantType.LONG_DOUBLE,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.LONG_DOUBLE,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token(ConstantType.DOUBLE,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.DOUBLE,source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("AN")){
 				if(next_char=='u' || next_char=='U'){//AP
-					list.add(new Token(ConstantType.LONG_UNSIGNED,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.LONG_UNSIGNED,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token(ConstantType.LONG,source.substring(begin_pos, --pos)));
+					list.add(new TokenS(ConstantType.LONG,source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
@@ -298,21 +294,21 @@ public class MyScanner {
 				if(next_char=='\\'){//BD
 					this.status="BD";
 				}else if(next_char=='\'' || next_char=='\n' || next_char=='\r'){
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}else if(next_char==0){
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 				}else{//BB
 					this.status="BB";
 				}
 			}else if(status.equals("BB")){
 				if(next_char=='\''){//BC
-					list.add(new Token(ConstantType.CHAR,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.CHAR,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new ErrorToken("ERROR","错误的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","错误的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -324,55 +320,55 @@ public class MyScanner {
 				}else if(next_char=='x'){//BM
 					this.status="BM";
 				}else if(next_char=='\n' || next_char=='\r'){
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}else if(next_char==0){
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 				}else{//BEG
 					this.status="BEG";
 				}
 			}else if(status.equals("BEG")){
 				if(next_char=='\''){//BFH
-					list.add(new Token(ConstantType.CHAR,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.CHAR,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new ErrorToken("ERROR","错误的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","错误的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
 			}else if(status.equals("BI")){
 				if(next_char=='\''){//BL
-					list.add(new Token(ConstantType.CHAR,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.CHAR,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char>='0' && next_char<='7'){//BJ
 					this.status="BJ";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
 			}else if(status.equals("BJ")){
 				if(next_char=='\''){//BL
-					list.add(new Token(ConstantType.CHAR,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.CHAR,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char>='0' && next_char<='7'){//BK
 					this.status="BK";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
 			}else if(status.equals("BK")){
 				if(next_char=='\''){//BL
-					list.add(new Token(ConstantType.CHAR,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.CHAR,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
@@ -382,51 +378,51 @@ public class MyScanner {
 				}else if((next_char>='8' && next_char<='9') || (next_char>='a' && next_char<='f') || (next_char>='A' && next_char<='F')){//BP
 					this.status="BP";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
 			}else if(status.equals("BN")){
 				if(next_char=='\''){//BQ
-					list.add(new Token(ConstantType.CHAR,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.CHAR,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if((next_char>='0' && next_char<='9') || (next_char>='a' && next_char<='f') || (next_char>='A' && next_char<='F')){//BP
 					this.status="BP";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
 			}else if(status.equals("BP")){
 				if(next_char=='\''){//BQ
-					list.add(new Token(ConstantType.CHAR,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.CHAR,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new ErrorToken("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}
 			}else if(status.equals("CA")){
 				if(next_char=='\"'){//CT
-					list.add(new Token(ConstantType.STRING,source.substring(begin_pos, pos)));
+					list.add(new TokenS(ConstantType.STRING,source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='\\'){//CB
 					this.status="CB";
 				}else if(next_char=='\n' || next_char=='\r'){
-					list.add(new ErrorToken("ERROR","不完整的字符串表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符串表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}else if(next_char==0){
-					list.add(new ErrorToken("ERROR","不完整的字符串表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符串表示形式",source.substring(begin_pos, --pos)));
 				}else{//CA
 					continue;
 				}
 			}else if(status.equals("CB")){
 				if(next_char=='\n' || next_char=='\r'){
-					list.add(new ErrorToken("ERROR","不完整的字符串表示形式",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","不完整的字符串表示形式",source.substring(begin_pos, --pos)));
 					begin_pos= pos;
 					this.status="S";
 				}else{//CA
@@ -441,54 +437,54 @@ public class MyScanner {
 					boolean flag=true;
 					for(int i=0;i<keys.length;i++){
 						if(keys[i].equals(temp)){
-							list.add(new Token(temp.toUpperCase(),temp));
+							list.add(new TokenS(temp.toUpperCase(),temp));
 							flag=false;
 							break;
 						}
 					}
 					for(int i=0;i<rwords.length;i++){
 						if(rwords[i].equals(temp)){
-							list.add(new ErrorToken("ERROR","保留字不能作为标示符使用",temp));
+							list.add(new ErrorTokenS("ERROR","保留字不能作为标示符使用",temp));
 							flag=false;
 							break;
 						}
 					}
 					
 					if(flag)
-						list.add(new Token("id",temp));
+						list.add(new TokenS("id",temp));
 					
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EA")){
 				if(next_char=='>'){//E3
-					list.add(new Token("->",source.substring(begin_pos, pos)));
+					list.add(new TokenS("->",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='='){//E4
-					list.add(new Token("-=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("-=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='-'){//E5
-					list.add(new Token("--",source.substring(begin_pos, pos)));
+					list.add(new TokenS("--",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("-",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("-",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EB")){
 				if(next_char=='+'){//E6
-					list.add(new Token("++",source.substring(begin_pos, pos)));
+					list.add(new TokenS("++",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='='){//E7
-					list.add(new Token("+=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("+=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("+",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("+",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
@@ -496,21 +492,21 @@ public class MyScanner {
 				if(next_char=='<'){//ED
 					this.status="ED";
 				}else if(next_char=='='){//E81
-					list.add(new Token("<=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("<=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("<",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("<",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("ED")){
 				if(next_char=='='){//E8
-					list.add(new Token("<<=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("<<=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("<<",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("<<",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
@@ -518,99 +514,99 @@ public class MyScanner {
 				if(next_char=='>'){//EF
 					this.status="EF";
 				}else if(next_char=='='){//E10
-					list.add(new Token(">=",source.substring(begin_pos, pos)));
+					list.add(new TokenS(">=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token(">",source.substring(begin_pos, --pos)));
+					list.add(new TokenS(">",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EF")){
 				if(next_char=='='){//E9
-					list.add(new Token(">>=",source.substring(begin_pos, pos)));
+					list.add(new TokenS(">>=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token(">>",source.substring(begin_pos, --pos)));
+					list.add(new TokenS(">>",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EG")){
 				if(next_char=='='){//E11
-					list.add(new Token("==",source.substring(begin_pos, pos)));
+					list.add(new TokenS("==",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("=",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("=",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EH")){
 				if(next_char=='&'){//E12
-					list.add(new Token("&&",source.substring(begin_pos, pos)));
+					list.add(new TokenS("&&",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='='){//E13
-					list.add(new Token("&=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("&=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("&",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("&",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EI")){
 				if(next_char=='|'){//E14
-					list.add(new Token("||",source.substring(begin_pos, pos)));
+					list.add(new TokenS("||",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char=='='){//E15
-					list.add(new Token("|=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("|=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("|",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("|",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EJ")){
 				if(next_char=='='){//E16
-					list.add(new Token("*=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("*=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("*",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("*",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EL")){
 				if(next_char=='='){//E17
-					list.add(new Token("%=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("%=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("%",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("%",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EM")){
 				if(next_char=='='){//E18
-					list.add(new Token("^=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("^=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("^",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("^",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
 			}else if(status.equals("EN")){
 				if(next_char=='='){//E19
-					list.add(new Token("!=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("!=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("!",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("!",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
@@ -620,11 +616,11 @@ public class MyScanner {
 				}else if(next_char=='*'){//FE
 					this.status="FE";
 				}else if(next_char=='='){//FB
-					list.add(new Token("/=",source.substring(begin_pos, pos)));
+					list.add(new TokenS("/=",source.substring(begin_pos, pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}else{
-					list.add(new Token("/",source.substring(begin_pos, --pos)));
+					list.add(new TokenS("/",source.substring(begin_pos, --pos)));
 					begin_pos=this.pos;
 					this.status="S";
 				}
@@ -632,7 +628,7 @@ public class MyScanner {
 				if(next_char=='\n' || next_char=='\r'){
 					begin_pos=this.pos;
 					this.status="S";
-					list.add(new Token("ENTER",null));
+					list.add(new TokenS("ENTER",null));
 				}else if(next_char==0){
 					break;
 				}else{
@@ -642,7 +638,7 @@ public class MyScanner {
 				if(next_char=='*'){
 					this.status="FF";
 				}else if(next_char==0){
-					list.add(new ErrorToken("ERROR","缺少\'*/\'作为注释的结束符",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","缺少\'*/\'作为注释的结束符",source.substring(begin_pos, --pos)));
 				}else{
 					continue;
 				}
@@ -651,7 +647,7 @@ public class MyScanner {
 					begin_pos=this.pos;
 					this.status="S";
 				}else if(next_char==0){
-					list.add(new ErrorToken("ERROR","缺少\'*/\'作为注释的结束符",source.substring(begin_pos, --pos)));
+					list.add(new ErrorTokenS("ERROR","缺少\'*/\'作为注释的结束符",source.substring(begin_pos, --pos)));
 				}else if(next_char=='*'){
 					continue;
 				}else{

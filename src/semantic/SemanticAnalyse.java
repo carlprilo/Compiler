@@ -16,10 +16,10 @@ public class SemanticAnalyse{
 	
 	public void Parsing(){
 		MyScanner scan=new MyScanner(text_input);
-		List<Token> token_list=scan.execute();
-		System.out.println(token_list.toString());
+		List<TokenS> token_S_list =scan.execute();
+		System.out.println(token_S_list.toString());
 		GrammarComplier gc=new GrammarComplier();
-		gc.analysis(token_list);
+		gc.analysis(token_S_list);
 		List<String> codes=gc.getCodes();
 		List<Id> ids=gc.getIds();
 		String output[] = new String[5];

@@ -10,7 +10,7 @@ public class TextLex{
     public String text;
     private DefaultTableModel tbmodel_lex_result;
     //	private DefaultTableModel tbmodel_lex_error;
-    private ArrayList<String> lex_result_stack;
+    private ArrayList<Token> lex_result_stack;
     private ArrayList<HashMap<String, String>> lex_error_stack;
     public int text_length;
     public int row_number=1;
@@ -21,7 +21,7 @@ public class TextLex{
     String[] Key = {"int","real","if","then","else","while"};
 
     public TextLex(String text, DefaultTableModel tb_lex_result, DefaultTableModel tb_lex_error){
-        lex_result_stack = new ArrayList<String>();
+        lex_result_stack = new ArrayList<Token>();
         lex_error_stack = new ArrayList<HashMap<String, String>>();
         this.text = text;
         this.tbmodel_lex_result = tb_lex_result;
@@ -29,7 +29,7 @@ public class TextLex{
         text_length = text.length();
     }
 
-    public ArrayList<String> get_Lex_Result(){
+    public ArrayList<Token> get_Lex_Result(){
         return lex_result_stack;
     }
     public ArrayList<HashMap<String, String>> get_Lex_Error() {
@@ -570,31 +570,30 @@ public class TextLex{
     public void printResult(String rs_value, String rs_name){
 //		tbmodel_lex_result.addRow(new String[]{rs_value, rs_name});
         if(rs_name.equals("标识符")){
-            lex_result_stack.add("ID");
+            lex_result_stack.add(new Token(rs_value,"ID",row_number,position));
             tbmodel_lex_result.addRow(new String[]{ rs_value,"ID",String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("整数")){
-            lex_result_stack.add("NUM");
+            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position));
             tbmodel_lex_result.addRow(new String[]{rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
         }
         else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
-            lex_result_stack.add("NUM");
+            lex_result_stack.add(new Token(rs_value,"NUM",row_number,position));
             tbmodel_lex_result.addRow(new String[]{ rs_value,"NUM",String.valueOf(row_number),String.valueOf(position)});
 
         }
         else if(rs_name.equals("单字符")){
-            lex_result_stack.add("CHAR");
+            lex_result_stack.add(new Token(rs_value,"CHAR",row_number,position));
             tbmodel_lex_result.addRow(new String[]{rs_value,"CHAR",String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("字符串")){
-            lex_result_stack.add("STR");
+            lex_result_stack.add(new Token(rs_value,"STR",row_number,position));
             tbmodel_lex_result.addRow(new String[]{rs_value,"STR",String.valueOf(row_number),String.valueOf(position)});
         }
         else {
-            lex_result_stack.add(rs_value);
+            lex_result_stack.add(new Token(rs_value,rs_value,row_number,position));
             tbmodel_lex_result.addRow(new String[]{rs_value,rs_name,String.valueOf(row_number),String.valueOf(position)});
         }
-
     }
 
     // 打印错误信息

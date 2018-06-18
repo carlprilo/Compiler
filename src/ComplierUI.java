@@ -1,4 +1,5 @@
 import ldylex.TextLex;
+import ldylex.Token;
 import parsing.TextParse;
 
 import java.awt.*;
@@ -328,8 +329,6 @@ public class ComplierUI extends JFrame{
         //
         //
 
-
-
         // the following line is a workaround for bug 4966109
         panel_right.addMouseListener(new MouseAdapter() {});
 
@@ -456,7 +455,7 @@ public class ComplierUI extends JFrame{
             if(action.equals("Run")){
 
                 //add
-                textArea.textPane.select(10,29);
+                //textArea.textPane.select(10,29);
                 textArea.textPane.requestFocus();
                 //add end
                 String text = textArea.textPane.getText();
@@ -465,7 +464,7 @@ public class ComplierUI extends JFrame{
                 lex = new TextLex(text,modelResult,null);
                 lex.scannerAll();
                 System.out.println("lex finish");
-                ArrayList<String> lex_result_stack =lex.get_Lex_Result();
+                ArrayList<Token> lex_result_stack =lex.get_Lex_Result();
                 textParse = new TextParse(lex_result_stack,modelDeduction);
                 textParse.parsing();
                 System.out.println("parsing finsished");
@@ -489,7 +488,7 @@ public class ComplierUI extends JFrame{
                 textArea.textPane.select(Integer.parseInt(from),Integer.parseInt(to));
                 textArea.textPane.requestFocus();
                 if(textParse==null) {
-                    ArrayList<String> lex_result_stack =lex.get_Lex_Result();
+                    ArrayList<Token> lex_result_stack =lex.get_Lex_Result();
                     textParse = new TextParse(lex_result_stack,modelDeduction);
                     textParse.deduce_str.add("program");
                 }
@@ -506,6 +505,7 @@ public class ComplierUI extends JFrame{
                 lex  = null;
                 textParse = null;
             }
+
             //按钮点击事件
             JScrollBar bar=paneResult.getVerticalScrollBar();
             bar.setValue(bar.getMaximum());
@@ -546,7 +546,7 @@ public class ComplierUI extends JFrame{
     //词法分析
     class LexicalTable extends JPanel
     {
-        private String[] columnNames = { "Token","Class", "Line","Position"};
+        private String[] columnNames = { "TokenS","Class", "Line","Position"};
         private Object[][] cells = {
         };
 
@@ -565,11 +565,8 @@ public class ComplierUI extends JFrame{
     //推导过程
     class DeductionTable extends JPanel
     {
-        private String[] columnNames = { "推导", "运用的产生式"};
-        private Object[][] cells =
-                {
-                        { "我是", "推导过程"},
-                };
+        private String[] columnNames = { "位置","推导", "运用的产生式"};
+        private Object[][] cells = {};
 
         public DeductionTable()
         {
