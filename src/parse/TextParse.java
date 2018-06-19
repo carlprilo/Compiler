@@ -89,7 +89,6 @@ public class TextParse{
                 tokenArrayList.remove(0);
             }
         }
-        //resultModel.addRow(new String[]{});
     }
 
     public String parsingStep(){
@@ -153,9 +152,6 @@ public class TextParse{
                 tag = false;
                 */
                 {
-
-//                tokenArrayList.get( 0 ).getTokenDetailType().equals( deduceArrayList.get(deduce.size()-1) );
-//                (right = predictMap.get( leftandinput )) != null
                     if (deduceArrayList.get(deduceArrayList.size()-1).equals( "=" )) {
                         LOGGER.info( "Error, 不能单独输入 ID, 请删除 多余的ID 或 补全。    " + "\n" );
                         errorModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),"Error", "不能单独输入ID,请删除多余的ID或补全."  });
@@ -182,19 +178,12 @@ public class TextParse{
                     if (absenceList.contains( deduceArrayList.get(deduceArrayList.size()-1) ) ) {
                         String absenceString = deduceArrayList.get(deduceArrayList.size()-1);
                         LOGGER.info( String.format( "Error, 缺少 %s 符号。    " + "\n", absenceString));
-//                        Error error = new Error( String.format( "缺少 %s 符号。", absenceString), tokenArrayList.get( 0 ) );
-//                        errorList.add( error );
                         LOGGER.info( "Error, 不能单独输入 ID, 请删除 多余的ID 或 补全。    " + "\n" );
                         errorModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),"Error"," 不能单独输入ID,请删除多余的ID或补全. "  });
 
                         //todo 这里应该向 input_cache增加一个 token
                         tokenArrayList.add( 0, new Token( absenceString, Keyword, tokenArrayList.get( 0 ).getRow(), tokenArrayList.get( 0 ).getRow(),0,0) );
-//                    stack.pop();
-
-//                    while ((right = predictMap.get( leftandinput )) == null) {
-//                        stack.pop();
-//                        leftandinput = deduceArrayList.get(deduce.size()-1) + "-" + tokenArrayList.get( 0 ).getTokenDetailType();
-//                    }
+//
                         continue;
                     }
 
@@ -210,52 +199,18 @@ public class TextParse{
                         }
                     }
 
-//                if (deduceArrayList.get(deduce.size()-1).equals( ";" )) {
-//                    LOGGER.info( "Error, 缺少 ; 符号, 请删除语句 或 补全 ;。    " + "\n" );
-//                    Error error = new Error( "缺少 ; 符号, 请删除语句 或 补全 ;。", preToken );
-//                    errorList.add( error );
-//
-//                    //todo 这里应该可以pop ,因为 ; 已经是结束了
-//                    stack.pop();
-////                    while ((right = predictMap.get( leftandinput )) == null) {
-////                        stack.pop();
-////                        leftandinput = deduceArrayList.get(deduce.size()-1) + "-" + tokenArrayList.get( 0 ).getTokenDetailType();
-////                    }
-//                    continue;
-//                }
-//
-//                //todo tokenArrayList.get( 0 ) or preToken
-//                if (deduceArrayList.get(deduce.size()-1).equals( "else" )) {
-//                    LOGGER.info( "Error, 缺少 else 符号。    " + "\n" );
-//                    Error error = new Error( "Error, 缺少 else 符号。", tokenArrayList.get( 0 ) );
-//                    errorList.add( error );
-//
-//                    //todo 这里应该向 input_cache增加一个 else token
-//                    tokenArrayList.add( 0, new Token( "else", Keyword, tokenArrayList.get( 0 ).getTokenLine(), tokenArrayList.get( 0 ).getTokenLine() ) );
-////                    stack.pop();
-//
-////                    while ((right = predictMap.get( leftandinput )) == null) {
-////                        stack.pop();
-////                        leftandinput = deduceArrayList.get(deduce.size()-1) + "-" + tokenArrayList.get( 0 ).getTokenDetailType();
-////                    }
-//                    continue;
-//                }
 
+                //todo 这里应该可以pop ,因为 ; 已经是结束了
 
-//                LOGGER.info( "Error, 不存在该表项, 恐慌模式将删除该token：    " + leftandinput + "  ,token info: " + tokenArrayList.get( 0 ) + "\n" );
-//                Error error = new Error( "Error, 不存在该表项, 恐慌模式将删除该token", tokenArrayList.get( 0 ) );
+                //todo tokenArrayList.get( 0 ) or preToken
+
+                //todo 这里应该向 input_cache增加一个 else token
+
                     LOGGER.info( "Error,多余 token：    " + leftandinput + "  ,token info: " + tokenArrayList.get( 0 ) + "\n" );
                     errorModel.addRow(new String[]{tokenArrayList.get(0).getRow()+","+ tokenArrayList.get(0).getPostion(),"Error","多余token"});
                     tokenArrayList.remove(0);
-                    //Error error = new Error( "多余 token", tokenArrayList.get( 0 ) );
 
-                    //errorList.add( error );
-                    //恐慌模式
-                   // preToken = tokenArrayList.remove( 0 );
                     //todo 调试方便，直接break
-//                break;
-
-
                 }
             }
         }

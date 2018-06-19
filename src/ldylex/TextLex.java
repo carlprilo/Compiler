@@ -1,6 +1,4 @@
 package ldylex;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.StringStack;
-import com.sun.tools.example.debug.tty.TTYResources_zh_CN;
 import semantic.Symbol;
 
 import java.util.ArrayList;
@@ -8,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DefaultTextUI;
 
 
 public class TextLex{
@@ -16,8 +13,8 @@ public class TextLex{
     public String text;
     private DefaultTableModel resultModel;
     private DefaultTableModel symbolModel;
-    private ArrayList<Token> lex_result_stack;
-    private ArrayList<HashMap<String, String>> lex_error_stack;
+    private ArrayList<Token> tokenArrayList;
+    private ArrayList<HashMap<String, String>> lexErrorStack;
     public List<Symbol> symbolTable=new ArrayList<>();
     public int text_length;
     public int row_number=1;
@@ -28,8 +25,8 @@ public class TextLex{
     String[] Key = {"int","real","if","then","else","while"};
 
     public TextLex(String text, DefaultTableModel tb_lex_result, DefaultTableModel symbolModel){
-        lex_result_stack = new ArrayList<Token>();
-        lex_error_stack = new ArrayList<HashMap<String, String>>();
+        tokenArrayList = new ArrayList<Token>();
+        lexErrorStack = new ArrayList<HashMap<String, String>>();
         this.text = text;
         this.resultModel = tb_lex_result;
 		this.symbolModel = symbolModel;
@@ -37,11 +34,11 @@ public class TextLex{
     }
 
     public ArrayList<Token> get_Lex_Result(){
-        return lex_result_stack;
+        return tokenArrayList;
     }
     public ArrayList<HashMap<String, String>> get_Lex_Error() {
         // TODO Auto-generated constructor stub
-        return lex_error_stack;
+        return lexErrorStack;
     }
 
     public int isAlpha(char c){
@@ -95,7 +92,7 @@ public class TextLex{
         System.out.println("before partIndex "+partIndex);
         System.out.println("index "+index);
         String res = " ";
-        if(index==0) {
+        if(index==0) { //判断是不是第一次执行该函数
             partIndex = index;
             text = text+'\0';
         }
@@ -112,15 +109,12 @@ public class TextLex{
                 position=0;
             } else {
                 position = partIndex-sumpos;
-               // res = String.valueOf(partIndex);
                 partIndex=scannerPart(partIndex);
                 tag = false;
-                //res = res+" "+String.valueOf(partIndex);
-                return lex_result_stack.get(lex_result_stack.size()-1);
+                return tokenArrayList.get(tokenArrayList.size()-1);
             }
         }
         System.out.println("partIndex "+partIndex +"    "+res);
-        //return  res;
         return null;
     }
 
@@ -247,10 +241,6 @@ public class TextLex{
             s = s+ch;
             ch=text.charAt(++i);
         }
-//		if(s.length()==1){
-//			printResult(s, "字符常数");
-//			return i;
-//		}
         // 到了结尾
         if(isKey(s)==1){
             // 输出key
@@ -576,40 +566,40 @@ public class TextLex{
     public void printResult(String rs_value, String rs_name){
 
         if(rs_name.equals("标识符")){
-            lex_result_stack.add(new Token(rs_value,TokenType.Identifier,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Identifier,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{ rs_value,TokenType.Identifier.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("关键字")){
-            lex_result_stack.add(new Token(rs_value,TokenType.Keyword,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Keyword,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{ rs_value,TokenType.Keyword.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("整数")){
-            lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if (rs_name.equals("科学计数")||rs_name.equals("浮点数")) {
-            lex_result_stack.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Number,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{ rs_value,TokenType.Number.toString(),String.valueOf(row_number),String.valueOf(position)});
 
         }
         else if(rs_name.equals("单字符")){
-            lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("双界符")||rs_value.equals(";")||rs_value.equals(",")){
-            lex_result_stack.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Delimiter,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{rs_value,TokenType.Delimiter.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("运算符")){
-            lex_result_stack.add(new Token(rs_value,TokenType.Operator,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Operator,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{rs_value,TokenType.Operator.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else if(rs_name.equals("注释")||rs_name.equals("单行注释")) {
-            lex_result_stack.add(new Token(rs_value,TokenType.Comment,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Comment,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{rs_value,TokenType.Comment.toString(),String.valueOf(row_number),String.valueOf(position)});
         }
         else {
-            lex_result_stack.add(new Token(rs_value,TokenType.Unknown,row_number,position,partIndex,partIndex+rs_value.length()));
+            tokenArrayList.add(new Token(rs_value,TokenType.Unknown,row_number,position,partIndex,partIndex+rs_value.length()));
             resultModel.addRow(new String[]{rs_value,TokenType.Unknown.toString(),String.valueOf(row_number),String.valueOf(position)});
 
         }
@@ -617,13 +607,11 @@ public class TextLex{
 
     // 打印错误信息
     public void printError(int row_num, String rs_value, String rs_name) {
-//		tbmodel_lex_error.addRow(new String[]{row_num+"", rs_value, rs_name});
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("row_num", row_num+"");
         hashMap.put("rs_value", rs_value+"");
         hashMap.put("rs_name", rs_name+"");
-        lex_error_stack.add(hashMap);
-
+        lexErrorStack.add(hashMap);
     }
 
 }

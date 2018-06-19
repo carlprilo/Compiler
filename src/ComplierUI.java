@@ -467,10 +467,8 @@ public class ComplierUI extends JFrame {
             System.out.println(action + " selected.......");
             if (action.equals("Run")) {
 
-                //add
-                //textArea.textPane.select(10,29);
+
                 textArea.textPane.requestFocus();
-                //add end
                 String text = textArea.textPane.getText();
                 System.out.println("lex start");
                 System.out.println(text);
@@ -482,9 +480,8 @@ public class ComplierUI extends JFrame {
                 textParse.parsing();
                 System.out.println("parse finsished");
 
-                //todo
-//                SemanticAnalyse semanticanalyse = new Sema,nticAnalyse(text, modelSymbol, null);
-//                semanticanalyse.parse();
+                //todo semantic
+
             } else if (action.equals("Next Step")) {
                 next();
             } else if (action.equals("Sync")) {
@@ -498,64 +495,38 @@ public class ComplierUI extends JFrame {
                 output_buffer = new StringBuffer();
                 textArea.textPane.setForeground(Color.black);
             } else if (action.equals("Build and Run")) {
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        System.out.println("in");
-//                        do {
-//                            next();
-//                            try {
-//                                sleep(200);
-//
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        } while (old_token != select && select != null);
-//                        try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
-//                            String pathname = ".\\output.txt";
-//                            chooser.setCurrentDirectory(new File("."));
-//                            int result = chooser.showOpenDialog(ComplierUI.this);
-//                            if (result == JFileChooser.APPROVE_OPTION) {
-//                                pathname = chooser.getSelectedFile().getPath();
-//                            }
-//                            File writename = new File(pathname);
-//                            writename.createNewFile();
-//                            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-//                            out.write(output_buffer.toString());
-//                            out.flush();
-//                            out.close();
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }).start();
-                SwingUtilities.invokeLater(() -> {
-                    System.out.println("in");
-                    do {
-                        next();
-                        try {
-                            sleep(50);
-                        } catch (InterruptedException e) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("in");
+                        do {
+                            next();
+                            try {
+                                sleep(200);
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        } while (old_token != select && select != null);
+                        try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
+                            String pathname = ".\\output.txt";
+                            chooser.setCurrentDirectory(new File("."));
+                            int result = chooser.showOpenDialog(ComplierUI.this);
+                            if (result == JFileChooser.APPROVE_OPTION) {
+                                pathname = chooser.getSelectedFile().getPath();
+                            }
+                            File writename = new File(pathname);
+                            writename.createNewFile();
+                            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+                            out.write(output_buffer.toString());
+                            out.flush();
+                            out.close();
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    } while (old_token != select && select != null);
-                    try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
-                        String pathname = ".\\output.txt";
-                        chooser.setCurrentDirectory(new File("."));
-                        int result = chooser.showOpenDialog(ComplierUI.this);
-                        if (result == JFileChooser.APPROVE_OPTION) {
-                            pathname = chooser.getSelectedFile().getPath();
-                        }
-                        File writename = new File(pathname);
-                        writename.createNewFile();
-                        BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-                        out.write(output_buffer.toString());
-                        out.flush();
-                        out.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-                });
+                }).start();
+
             }
         }
     }
